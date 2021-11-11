@@ -10,8 +10,10 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import signUpPage.signUpPage;
-import mainPage.MainPage;
+import mainPage.mainPage;
 
 @SuppressWarnings("serial")
 public class loginPage extends JFrame{
@@ -59,7 +61,12 @@ public class loginPage extends JFrame{
                     put("password", pwdText.getText());
                 }};
                 var objectMapper = new ObjectMapper();
-                String requestBody = objectMapper.writeValueAsString(values);
+                try {
+                    String requestBody = objectMapper.writeValueAsString(values);
+                    System.out.println(requestBody);
+                } catch (JsonProcessingException ex) {
+                    ex.printStackTrace();
+                }
 
 
                 if(idText.getText().equals("")){
