@@ -11,11 +11,11 @@ import javax.swing.*;
 import loginPage.loginPage;
 
 @SuppressWarnings("serial")
-public class MainPage extends JFrame {
+public class mainPage extends JFrame {
     private Font ButtonFont = new Font("나눔고딕", Font.PLAIN, 20);;
     private myPanel panel = new myPanel();
 
-    public MainPage(){
+    public mainPage(){
       //패널 설정
       panel.setSize(1100, 824);
       panel.setLayout(null);
@@ -112,7 +112,7 @@ public class MainPage extends JFrame {
     }
 
     public static void main(String[] args) {
-        MainPage p = new MainPage();
+        mainPage p = new mainPage();
         p.visible();
         new loginPage();
     }
