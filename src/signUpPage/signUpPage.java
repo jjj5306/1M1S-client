@@ -3,14 +3,13 @@ package signUpPage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.*;
 import java.util.HashMap;
-import javax.imageio.ImageIO;
-import javax.swing.*;
+
+import loginPage.loginPage;
 
 @SuppressWarnings("serial")
 public class signUpPage extends JFrame {
@@ -19,13 +18,13 @@ public class signUpPage extends JFrame {
     private myPanel panel1 = new myPanel();
     private myPanel panel2 = new myPanel();
 
-    public signUpPage(){
+    public signUpPage() {
         //프레임 설정
         setTitle("1M1S");
         add(panel1);
         setLayout(null);
         setResizable(false);
-        setSize(1100,824);
+        setSize(1100, 824);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //패널 설정
@@ -136,29 +135,29 @@ public class signUpPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //각 칸마다 빈칸이 있는지 체크
-                if(nameText.getText().equals("")){
+                if (nameText.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "이름을 입력해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
-                } else if(!manBox.isSelected() && !womanBox.isSelected()){
+                } else if (!manBox.isSelected() && !womanBox.isSelected()) {
                     JOptionPane.showMessageDialog(null, "성별을 선택해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
-                } else if(manBox.isSelected() && womanBox.isSelected()){
+                } else if (manBox.isSelected() && womanBox.isSelected()) {
                     JOptionPane.showMessageDialog(null, "성별은 하나만 선택해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
-                } else if(emailText.getText().equals("")){
+                } else if (emailText.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "이메일을 입력해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
-                } else if(userIdText.getText().equals("")){
+                } else if (userIdText.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "아이디를 입력해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
-                } else if(passwdText.getText().equals("")){
+                } else if (passwdText.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
-                } else if(passwd2Text.getText().equals("")){
+                } else if (passwd2Text.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "비밀번호 확인을 입력해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
-                } else if(!passwdText.getText().equals(passwd2Text.getText())){
+                } else if (!passwdText.getText().equals(passwd2Text.getText())) {
                     JOptionPane.showMessageDialog(null, "비밀번호와 비밀번호 확인이 일치하지 않습니다.", "Message", JOptionPane.ERROR_MESSAGE);
                     passwdText.setText("");
                     passwd2Text.setText("");
-                } else{
+                } else {
                     //DB에 JSON형식으로 넘겨준다.
                     var values = new HashMap<String, String>() {{
                         put("name", nameText.getText());
-                        if(manBox.isSelected()) put("gender", "man");
+                        if (manBox.isSelected()) put("gender", "man");
                         else put("gender", "woman");
                         put("nickname", nickNameText.getText());
                         put("email", emailText.getText());
@@ -185,7 +184,8 @@ public class signUpPage extends JFrame {
         //이메일 포맷확인은 보류
 
 
-       //패널 2~...에서 설문조사 정보 입력받기
+        //패널 2~...에서 설문조사 정보 입력받기
+        //다 하고 마지막 제출때  setVisible(false);
 
     }
 

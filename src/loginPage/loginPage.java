@@ -8,50 +8,51 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.HashMap;
+import mainPage.mainPage;
 
 @SuppressWarnings("serial")
 public class loginPage extends JFrame{
     private Font ButtonFont = new Font("나눔고딕", Font.PLAIN, 20);;
-    private myPanel panel = new myPanel();
+    private myPanel loginpanel = new myPanel();
 
-    public loginPage(){
-        //프레임 설정
+    public loginPage(mainPage p){
         setTitle("1M1S");
-        add(panel);
+        setVisible(true);
         setLayout(null);
         setResizable(false);
-        setSize(1100,824);
+        setSize(1100, 824);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        add(loginpanel);
 
         //패널 설정
-        panel.setSize(1100, 824);
-        panel.setLayout(null);
+        loginpanel.setVisible(true);
+        loginpanel.setSize(1100, 824);
+        loginpanel.setLayout(null);
 
         //아이디 입력
         Label idLabel = new Label();
         idLabel.setText("USER ID");
         idLabel.setFont(ButtonFont);
         idLabel.setBounds(320, 200, 88, 30);
-        panel.add(idLabel);
+        loginpanel.add(idLabel);
 
         TextField idText = new TextField();
         idText.setFont(ButtonFont);
         idText.setBounds(320, 235, 370, 30);
-        panel.add(idText);
+        loginpanel.add(idText);
 
         //비밀번호 입력
         Label pwdLabel = new Label();
         pwdLabel.setText("PASSWORD");
         pwdLabel.setFont(ButtonFont);
         pwdLabel.setBounds(320, 280, 125, 30);
-        panel.add(pwdLabel);
+        loginpanel.add(pwdLabel);
 
         TextField pwdText = new TextField();
         pwdText.setFont(ButtonFont);
         pwdText.setBounds(320, 315, 370, 30);
         pwdText.setEchoChar('*');
-        panel.add(pwdText);
+        loginpanel.add(pwdText);
 
         //로그인 버튼
         JButton loginButton = new JButton("Login");
@@ -83,6 +84,7 @@ public class loginPage extends JFrame{
                         JOptionPane.showMessageDialog(null, "틀린 비밀번호입니다.", "Message", JOptionPane.ERROR_MESSAGE);
                         pwdText.setText("");
                     } else{
+                        p.setVisible(true);
                         setVisible(false);
                     }
                 }
@@ -90,7 +92,7 @@ public class loginPage extends JFrame{
         });
         loginButton.setFont(ButtonFont);
         loginButton.setBounds(320, 355, 180, 80);
-        panel.add(loginButton);
+        loginpanel.add(loginButton);
 
         //회원가입 버튼
         JButton signUpButton = new JButton("Sign Up");
@@ -104,7 +106,7 @@ public class loginPage extends JFrame{
 
         signUpButton.setFont(ButtonFont);
         signUpButton.setBounds(510, 355, 180, 80);
-        panel.add(signUpButton);
+        loginpanel.add(signUpButton);
 
     }
 

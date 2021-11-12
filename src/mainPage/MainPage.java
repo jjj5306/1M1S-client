@@ -1,32 +1,31 @@
 package mainPage;
 
+import loginPage.loginPage;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
-import loginPage.loginPage;
 
 @SuppressWarnings("serial")
 public class mainPage extends JFrame {
     private Font ButtonFont = new Font("나눔고딕", Font.PLAIN, 20);;
-    private myPanel panel = new myPanel();
+    private myPanel mainpanel = new myPanel();
 
     public mainPage() {
         //프레임 설정
         setTitle("1M1S");
-        add(panel);
+        setVisible(false);
         setLayout(null);
         setResizable(false);
         setSize(1100, 824);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //패널 설정
-        panel.setSize(1100, 824);
-        panel.setLayout(null);
+        add(mainpanel);
+        mainpanel.setSize(1100, 824);
+        mainpanel.setLayout(null);
+        mainpanel.setVisible(true);
 
         //마이페이지 버튼 설정
         JButton button1 = new JButton("회원 정보");
@@ -39,7 +38,7 @@ public class mainPage extends JFrame {
         });
         button1.setFont(ButtonFont);
         button1.setBounds(0, 0, 200, 110);
-        panel.add(button1);
+        mainpanel.add(button1);
 
         //시간관리 버튼 설정
         JButton button2 = new JButton("시간 관리");
@@ -52,7 +51,7 @@ public class mainPage extends JFrame {
         });
         button2.setFont(ButtonFont);
         button2.setBounds(0, 110, 200, 110);
-        panel.add(button2);
+        mainpanel.add(button2);
 
         //랭킹 버튼 설정
         JButton button3 = new JButton("랭킹");
@@ -65,7 +64,7 @@ public class mainPage extends JFrame {
         });
         button3.setFont(ButtonFont);
         button3.setBounds(0, 220, 200, 110);
-        panel.add(button3);
+        mainpanel.add(button3);
 
         //그룹 버튼 설정
         JButton button4 = new JButton("그룹");
@@ -78,7 +77,7 @@ public class mainPage extends JFrame {
         });
         button4.setFont(ButtonFont);
         button4.setBounds(0, 330, 200, 110);
-        panel.add(button4);
+        mainpanel.add(button4);
 
         //게시판 버튼 설정
         JButton button5 = new JButton("게시판");
@@ -91,9 +90,7 @@ public class mainPage extends JFrame {
         });
         button5.setFont(ButtonFont);
         button5.setBounds(00, 440, 200, 384);
-        panel.add(button5);
-
-
+        mainpanel.add(button5);
     }
 
     class myPanel extends JPanel{
@@ -107,7 +104,6 @@ public class mainPage extends JFrame {
 
     public static void main(String[] args) {
         mainPage p = new mainPage();
-        p.setVisible(true);
-        new loginPage();
+        loginPage loginP = new loginPage(p);
     }
 }
