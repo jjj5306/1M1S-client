@@ -1,19 +1,13 @@
 package loginPage;
 
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.util.HashMap;
-import javax.imageio.ImageIO;
-import javax.swing.*;
-
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import signUpPage.signUpPage;
-import mainPage.mainPage;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.HashMap;
 
 @SuppressWarnings("serial")
 public class loginPage extends JFrame{
@@ -21,11 +15,20 @@ public class loginPage extends JFrame{
     private myPanel panel = new myPanel();
 
     public loginPage(){
+        //프레임 설정
+        setTitle("1M1S");
+        add(panel);
+        setLayout(null);
+        setResizable(false);
+        setSize(1100,824);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
+
         //패널 설정
         panel.setSize(1100, 824);
         panel.setLayout(null);
 
-        //아이디 입력받는 박스
+        //아이디 입력
         Label idLabel = new Label();
         idLabel.setText("USER ID");
         idLabel.setFont(ButtonFont);
@@ -37,7 +40,7 @@ public class loginPage extends JFrame{
         idText.setBounds(320, 235, 370, 30);
         panel.add(idText);
 
-        //비밀번호 입력받는 박스
+        //비밀번호 입력
         Label pwdLabel = new Label();
         pwdLabel.setText("PASSWORD");
         pwdLabel.setFont(ButtonFont);
@@ -55,34 +58,33 @@ public class loginPage extends JFrame{
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //로그인 관련 부분 나중에 db연동하여 api사용
-                var values = new HashMap<String, String>() {{
-                    put("username", idText.getText());
-                    put("password", pwdText.getText());
-                }};
-                var objectMapper = new ObjectMapper();
-                try {
-                    String requestBody = objectMapper.writeValueAsString(values);
-                    System.out.println(requestBody);
-                } catch (JsonProcessingException ex) {
-                    ex.printStackTrace();
-                }
-
-
                 if(idText.getText().equals("")){
                     JOptionPane.showMessageDialog(null, "아이디를 입력해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
                 }else if(pwdText.getText().equals("")){
                     JOptionPane.showMessageDialog(null, "비밀번호를 입력해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
-                }
-                else if(!(idText.getText().equals("aaa"))) {
-                    JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다.", "Message", JOptionPane.ERROR_MESSAGE);
-                    idText.setText("");
-                    pwdText.setText("");
-                } else if(!(pwdText.getText().equals("bbb123"))){
-                    JOptionPane.showMessageDialog(null, "틀린 비밀번호입니다.", "Message", JOptionPane.ERROR_MESSAGE);
-                    pwdText.setText("");
-                } else{
-                    unvisible();
+                }else{
+                    var values = new HashMap<String, String>() {{
+                        put("username", idText.getText());
+                        put("password", pwdText.getText());
+                    }};
+                    var objectMapper = new ObjectMapper();
+                    try {
+                        String requestBody = objectMapper.writeValueAsString(values);
+                        System.out.println(requestBody);
+                    } catch (JsonProcessingException ex) {
+                        ex.printStackTrace();
+                    }
+                    //임시 로그인
+                    if(!(idText.getText().equals("aaa"))) {
+                        JOptionPane.showMessageDialog(null, "존재하지 않는 아이디입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+                        idText.setText("");
+                        pwdText.setText("");
+                    } else if(!(pwdText.getText().equals("bbb123"))){
+                        JOptionPane.showMessageDialog(null, "틀린 비밀번호입니다.", "Message", JOptionPane.ERROR_MESSAGE);
+                        pwdText.setText("");
+                    } else{
+                        setVisible(false);
+                    }
                 }
             }
         });
@@ -96,7 +98,7 @@ public class loginPage extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 signUpPage signUp = new signUpPage();
-                signUp.visible();
+                signUp.setVisible(true);
             }
         });
 
@@ -104,14 +106,6 @@ public class loginPage extends JFrame{
         signUpButton.setBounds(510, 355, 180, 80);
         panel.add(signUpButton);
 
-        //프레임 설정
-        setTitle("1M1S");
-        add(panel);
-        setLayout(null);
-        setResizable(false);
-        setSize(1100,824);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        visible();
     }
 
     //myPanel정의 후 사용
@@ -124,11 +118,4 @@ public class loginPage extends JFrame{
         }
     }
 
-    public void visible(){
-        setVisible(true);
-    }
-
-    public void unvisible(){
-        setVisible(false);
-    }
 }

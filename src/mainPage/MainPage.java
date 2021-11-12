@@ -15,83 +15,85 @@ public class mainPage extends JFrame {
     private Font ButtonFont = new Font("나눔고딕", Font.PLAIN, 20);;
     private myPanel panel = new myPanel();
 
-    public mainPage(){
-      //패널 설정
-      panel.setSize(1100, 824);
-      panel.setLayout(null);
+    public mainPage() {
+        //프레임 설정
+        setTitle("1M1S");
+        add(panel);
+        setLayout(null);
+        setResizable(false);
+        setSize(1100, 824);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-      //마이페이지 버튼 설정
-      JButton button1 = new JButton("회원 정보");
-      button1.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-              //여기에 마이 페이지로 이동하는 부분 작성
-              JOptionPane.showMessageDialog(null, "마이페이지로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE );
-          }
-      });
-      button1.setFont(ButtonFont);
-      button1.setBounds(0, 0, 200, 110);
-      panel.add(button1);
+        //패널 설정
+        panel.setSize(1100, 824);
+        panel.setLayout(null);
 
-      //시간관리 버튼 설정
-      JButton button2 = new JButton("시간 관리");
-      button2.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-              //여기에 시간관리 페이지로 이동하는 부분 작성
-              JOptionPane.showMessageDialog(null, "시간관리로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE );
-          }
-      });
-      button2.setFont(ButtonFont);
-      button2.setBounds(0, 110, 200, 110);
-      panel.add(button2);
+        //마이페이지 버튼 설정
+        JButton button1 = new JButton("회원 정보");
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //여기에 마이 페이지로 이동하는 부분 작성
+                JOptionPane.showMessageDialog(null, "마이페이지로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        button1.setFont(ButtonFont);
+        button1.setBounds(0, 0, 200, 110);
+        panel.add(button1);
 
-      //랭킹 버튼 설정
-      JButton button3 = new JButton("랭킹");
-      button3.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-              //여기에 랭킹 페이지로 이동하는 부분 작성
-              JOptionPane.showMessageDialog(null, "랭킹으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE );
-          }
-      });
-      button3.setFont(ButtonFont);
-      button3.setBounds(0, 220, 200, 110);
-      panel.add(button3);
+        //시간관리 버튼 설정
+        JButton button2 = new JButton("시간 관리");
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //여기에 시간관리 페이지로 이동하는 부분 작성
+                JOptionPane.showMessageDialog(null, "시간관리로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        button2.setFont(ButtonFont);
+        button2.setBounds(0, 110, 200, 110);
+        panel.add(button2);
 
-      //그룹 버튼 설정
-      JButton button4 = new JButton("그룹");
-      button4.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-              //여기에 그룹 페이지로 이동하는 부분 작성
-              JOptionPane.showMessageDialog(null, "그룹으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE );
-          }
-      });
-      button4.setFont(ButtonFont);
-      button4.setBounds(0, 330, 200, 110);
-      panel.add(button4);
+        //랭킹 버튼 설정
+        JButton button3 = new JButton("랭킹");
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //여기에 랭킹 페이지로 이동하는 부분 작성
+                JOptionPane.showMessageDialog(null, "랭킹으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        button3.setFont(ButtonFont);
+        button3.setBounds(0, 220, 200, 110);
+        panel.add(button3);
 
-      //게시판 버튼 설정
-      JButton button5 = new JButton("게시판");
-      button5.addActionListener(new ActionListener() {
-          @Override
-          public void actionPerformed(ActionEvent e) {
-              //여기에 게시판 페이지로 이동하는 부분 작성
-              JOptionPane.showMessageDialog(null, "게시판으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE );
-          }
-      });
-      button5.setFont(ButtonFont);
-      button5.setBounds(00, 440, 200, 384);
-      panel.add(button5);
+        //그룹 버튼 설정
+        JButton button4 = new JButton("그룹");
+        button4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //여기에 그룹 페이지로 이동하는 부분 작성
+                JOptionPane.showMessageDialog(null, "그룹으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        button4.setFont(ButtonFont);
+        button4.setBounds(0, 330, 200, 110);
+        panel.add(button4);
 
-      //프레임 설정
-      setTitle("1M1S");
-      add(panel);
-      setLayout(null);
-      setResizable(false);
-      setSize(1100,824);
-      setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //게시판 버튼 설정
+        JButton button5 = new JButton("게시판");
+        button5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //여기에 게시판 페이지로 이동하는 부분 작성
+                JOptionPane.showMessageDialog(null, "게시판으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        button5.setFont(ButtonFont);
+        button5.setBounds(00, 440, 200, 384);
+        panel.add(button5);
+
+
     }
 
     class myPanel extends JPanel{
@@ -103,17 +105,9 @@ public class mainPage extends JFrame {
         }
     }
 
-    public void visible(){
-        setVisible(true);
-    }
-
-    public void unvisible(){
-        setVisible(false);
-    }
-
     public static void main(String[] args) {
         mainPage p = new mainPage();
-        p.visible();
+        p.setVisible(true);
         new loginPage();
     }
 }
