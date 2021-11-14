@@ -2,13 +2,11 @@ package signUpPage;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-
 import loginPage.loginPage;
 
 @SuppressWarnings("serial")
@@ -36,30 +34,34 @@ public class signUpPage extends JFrame {
         //x누르면 현재 프레임만 끔
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
+        //****************************************************************************************************************************************************************
+
         //패널 설정
         //패널1에서 회원가입 기본 정보입력 받기
         panel1.setSize(1100, 824);
         panel1.setLayout(null);
         panel1.setVisible(true);
-
+        //패널2에서 관심분야 선택
         panel2.setSize(1100, 824);
         panel2.setLayout(null);
         panel2.setVisible(false);
-
+        //운동 분야 설문조사 패널
         panelExcercise.setSize(1100, 824);
         panelExcercise.setLayout(null);
         panelEmploy.setVisible(false);
-
+        //프로그래밍 분야 설문조사 패널
         panelPrograming.setSize(1100, 824);
         panelPrograming.setLayout(null);
         panelPrograming.setVisible(false);
-
+        //취업준비 설문조사 패널
         panelEmploy.setSize(1100, 824);
         panelEmploy.setLayout(null);
         panelEmploy.setVisible(false);
 
+        //****************************************************************************************************************************************************************
 
-        //되돌아가기 버튼
+        //패널1
+        //패널1 되돌아가기 버튼
         JButton rollBackButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\rollback.png")));
         rollBackButton.addActionListener(new ActionListener() {
             @Override
@@ -78,7 +80,6 @@ public class signUpPage extends JFrame {
         nameLabel.setFont(ButtonFont);
         nameLabel.setBounds(320, 200, 60, 30);
         panel1.add(nameLabel);
-
         TextField nameText = new TextField();
         nameText.setFont(ButtonFont);
         nameText.setBounds(390, 200, 100, 30);
@@ -90,7 +91,6 @@ public class signUpPage extends JFrame {
         manBox.setFont(ButtonFont);
         manBox.setBounds(580, 200, 70, 30);
         panel1.add(manBox);
-
         JCheckBox womanBox = new JCheckBox();
         womanBox.setText("woman");
         womanBox.setFont(ButtonFont);
@@ -103,7 +103,6 @@ public class signUpPage extends JFrame {
         nicknameLabel.setFont(ButtonFont);
         nicknameLabel.setBounds(320, 260, 95, 30);
         panel1.add(nicknameLabel);
-
         TextField nickNameText = new TextField();
         nickNameText.setFont(ButtonFont);
         nickNameText.setBounds(430, 260, 100, 30);
@@ -115,7 +114,6 @@ public class signUpPage extends JFrame {
         emailIdLabel.setFont(ButtonFont);
         emailIdLabel.setBounds(320, 320, 70, 30);
         panel1.add(emailIdLabel);
-
         TextField emailText = new TextField();
         emailText.setFont(ButtonFont);
         emailText.setBounds(400, 320, 300, 30);
@@ -127,7 +125,6 @@ public class signUpPage extends JFrame {
         userIdLabel.setFont(ButtonFont);
         userIdLabel.setBounds(320, 380, 70, 30);
         panel1.add(userIdLabel);
-
         TextField userIdText = new TextField();
         userIdText.setFont(ButtonFont);
         userIdText.setBounds(400, 380, 100, 30);
@@ -139,7 +136,6 @@ public class signUpPage extends JFrame {
         passwdLabel.setFont(ButtonFont);
         passwdLabel.setBounds(320, 440, 125, 30);
         panel1.add(passwdLabel);
-
         TextField passwdText = new TextField();
         passwdText.setFont(ButtonFont);
         passwdText.setBounds(460, 440, 220, 30);
@@ -152,19 +148,17 @@ public class signUpPage extends JFrame {
         passwd2Label.setFont(ButtonFont);
         passwd2Label.setBounds(320, 500, 190, 30);
         panel1.add(passwd2Label);
-
         TextField passwd2Text = new TextField();
         passwd2Text.setFont(ButtonFont);
         passwd2Text.setBounds(525, 500, 220, 30);
         passwd2Text.setEchoChar('*');
         panel1.add(passwd2Text);
 
-
-        //제출 버튼 누른 후
-        //필드별 빈칸 체크
-        //성별 두 개 선택했는지 체크
-        //아이디, 닉네임, 폰, 이메일 중복체크
-        //확인, 비밀번호, 비밀번호 확인 같은지 체크
+        //제출 버튼 누른 후 아래의 사항들 체크
+            //필드별 빈칸
+            //성별 두 개 선택했는지 체크
+            //아이디, 닉네임, 폰, 이메일 중복체크
+            //확인, 비밀번호, 비밀번호 확인 같은지 체크
         JButton nextButton = new JButton("Next");
         nextButton.addActionListener(new ActionListener() {
             @Override
@@ -217,7 +211,9 @@ public class signUpPage extends JFrame {
         panel1.add(nextButton);
         //이메일 포맷확인은 보류
 
-        //패널 2~...에서 설문조사 정보 입력받기
+        //****************************************************************************************************************************************************************
+
+        //패널 2
         //이전 설문조사로 되돌아가기 버튼
         JButton rollBackButton2 = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\rollback.png")));
         rollBackButton2.addActionListener(new ActionListener() {
@@ -230,10 +226,8 @@ public class signUpPage extends JFrame {
         rollBackButton2.setFont(ButtonFont);
         rollBackButton2.setBounds(155, 105, 80, 80);
         rollBackButton2.setContentAreaFilled(false);
-
         panel2.add(rollBackButton2);
 
-        //관심분야 버튼을 누르면 관심분야별 패널 전환(같은 프레임)
         //안내 글
         JLabel text = new JLabel();
         text.setText("관심 분야를 선택해주세요!");
@@ -255,6 +249,11 @@ public class signUpPage extends JFrame {
         excerciseButton.setBounds(300, 310, 150, 150);
         excerciseButton.setContentAreaFilled(false);
         panel2.add(excerciseButton);
+        JLabel excerciseLabel = new JLabel();
+        excerciseLabel.setText("운동");
+        excerciseLabel.setFont(ButtonFont);
+        excerciseLabel.setBounds(355, 470, 60, 30);
+        panel2.add(excerciseLabel);
 
         //프로그래밍 선택 버튼
         JButton programingButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\programing.png")));
@@ -270,6 +269,11 @@ public class signUpPage extends JFrame {
         programingButton.setBounds(480, 310, 150, 150);
         programingButton.setContentAreaFilled(false);
         panel2.add(programingButton);
+        JLabel programingLabel = new JLabel();
+        programingLabel.setText("프로그래밍");
+        programingLabel.setFont(ButtonFont);
+        programingLabel.setBounds(505, 470, 150, 30);
+        panel2.add(programingLabel);
 
         //취업 선택 버튼
         JButton employButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\employ.png")));
@@ -285,14 +289,63 @@ public class signUpPage extends JFrame {
         employButton.setBounds(660, 310, 150, 150);
         employButton.setContentAreaFilled(false);
         panel2.add(employButton);
+        JLabel employLabel = new JLabel();
+        employLabel.setText("취업 준비");
+        employLabel.setFont(ButtonFont);
+        employLabel.setBounds(695, 470, 120, 30);
+        panel2.add(employLabel);
+
+        //****************************************************************************************************************************************************************
 
         //각 관심분야별 패널 부분
         //운동 패널
+        //관심분야 선택 전으로 돌아가기
+        JButton excerciseRollBackButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\rollback.png")));
+        excerciseRollBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelExcercise.setVisible(false);
+                panel2.setVisible(true);
+            }
+        });
+        excerciseRollBackButton.setFont(ButtonFont);
+        excerciseRollBackButton.setBounds(155, 105, 80, 80);
+        excerciseRollBackButton.setContentAreaFilled(false);
+        panelExcercise.add(excerciseRollBackButton);
+
+        //****************************************************************************************************************************************************************
 
         //프로그래밍 패널
+        //관심분야 선택 전으로 돌아가기
+        JButton programingRollBackButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\rollback.png")));
+        programingRollBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelPrograming.setVisible(false);
+                panel2.setVisible(true);
+            }
+        });
+        programingRollBackButton.setFont(ButtonFont);
+        programingRollBackButton.setBounds(155, 105, 80, 80);
+        programingRollBackButton.setContentAreaFilled(false);
+        panelPrograming.add(programingRollBackButton);
 
-        //운동 패널
+        //****************************************************************************************************************************************************************
 
+        //취업 패널
+        //관심분야 선택 전으로 돌아가기
+        JButton employRollBackButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\rollback.png")));
+        employRollBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelEmploy.setVisible(false);
+                panel2.setVisible(true);
+            }
+        });
+        employRollBackButton.setFont(ButtonFont);
+        employRollBackButton.setBounds(155, 105, 80, 80);
+        employRollBackButton.setContentAreaFilled(false);
+        panelEmploy.add(employRollBackButton);
     }
 
     //myPanel정의 후 사용

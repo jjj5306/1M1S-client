@@ -1,7 +1,6 @@
 package mainPage;
 
 import loginPage.loginPage;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -20,12 +19,16 @@ public class mainPage extends JFrame {
         setResizable(false);
         setSize(1100, 824);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        add(mainpanel);
+
+        //**************************************************************************************************************
 
         //패널 설정
-        add(mainpanel);
         mainpanel.setSize(1100, 824);
         mainpanel.setLayout(null);
         mainpanel.setVisible(true);
+
+        //**************************************************************************************************************
 
         //마이페이지 버튼 설정
         JButton button1 = new JButton("회원 정보");

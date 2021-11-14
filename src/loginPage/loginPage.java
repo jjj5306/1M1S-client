@@ -16,6 +16,7 @@ public class loginPage extends JFrame{
     private myPanel loginpanel = new myPanel();
 
     public loginPage(mainPage p){
+        //프레임 설정
         setTitle("1M1S");
         setVisible(true);
         setLayout(null);
@@ -24,10 +25,14 @@ public class loginPage extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(loginpanel);
 
+        //**************************************************************************************************************
+
         //패널 설정
         loginpanel.setVisible(true);
         loginpanel.setSize(1100, 824);
         loginpanel.setLayout(null);
+
+        //**************************************************************************************************************
 
         //아이디 입력
         Label idLabel = new Label();
@@ -35,7 +40,6 @@ public class loginPage extends JFrame{
         idLabel.setFont(ButtonFont);
         idLabel.setBounds(390, 230, 88, 30);
         loginpanel.add(idLabel);
-
         TextField idText = new TextField();
         idText.setFont(ButtonFont);
         idText.setBounds(390, 265, 370, 30);
@@ -47,7 +51,6 @@ public class loginPage extends JFrame{
         pwdLabel.setFont(ButtonFont);
         pwdLabel.setBounds(390, 310, 125, 30);
         loginpanel.add(pwdLabel);
-
         TextField pwdText = new TextField();
         pwdText.setFont(ButtonFont);
         pwdText.setBounds(390, 345, 370, 30);
@@ -104,11 +107,9 @@ public class loginPage extends JFrame{
                 signUp.setVisible(true);
             }
         });
-
         signUpButton.setFont(ButtonFont);
         signUpButton.setBounds(580, 385, 180, 80);
         loginpanel.add(signUpButton);
-
     }
 
     //myPanel정의 후 사용
