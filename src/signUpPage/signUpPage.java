@@ -13,19 +13,28 @@ import loginPage.loginPage;
 
 @SuppressWarnings("serial")
 public class signUpPage extends JFrame {
+    private Font BigFont = new Font("나눔고딕", Font.PLAIN, 30);
     private Font ButtonFont = new Font("나눔고딕", Font.PLAIN, 20);
     private Font smallFont = new Font("나눔고딕", Font.PLAIN, 15);
-    private myPanel panel1 = new myPanel();
-    private myPanel panel2 = new myPanel();
+    private myPanel1 panel1 = new myPanel1();
+    private myPanel2 panel2 = new myPanel2();
+    private myPanel3 panelExcercise = new myPanel3();
+    private myPanel3 panelPrograming = new myPanel3();
+    private myPanel3 panelEmploy = new myPanel3();
 
     public signUpPage() {
         //프레임 설정
         setTitle("1M1S");
         add(panel1);
+        add(panel2);
+        add(panelExcercise);
+        add(panelPrograming);
+        add(panelEmploy);
         setLayout(null);
         setResizable(false);
         setSize(1100, 824);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //x누르면 현재 프레임만 끔
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         //패널 설정
         //패널1에서 회원가입 기본 정보입력 받기
@@ -36,6 +45,32 @@ public class signUpPage extends JFrame {
         panel2.setSize(1100, 824);
         panel2.setLayout(null);
         panel2.setVisible(false);
+
+        panelExcercise.setSize(1100, 824);
+        panelExcercise.setLayout(null);
+        panelEmploy.setVisible(false);
+
+        panelPrograming.setSize(1100, 824);
+        panelPrograming.setLayout(null);
+        panelPrograming.setVisible(false);
+
+        panelEmploy.setSize(1100, 824);
+        panelEmploy.setLayout(null);
+        panelEmploy.setVisible(false);
+
+
+        //되돌아가기 버튼
+        JButton rollBackButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\rollback.png")));
+        rollBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        rollBackButton.setFont(ButtonFont);
+        rollBackButton.setBounds(155, 105, 80, 80);
+        rollBackButton.setContentAreaFilled(false);
+        panel1.add(rollBackButton);
 
         //이름 입력받기
         Label nameLabel = new Label();
@@ -173,7 +208,6 @@ public class signUpPage extends JFrame {
                     }
                     //다음 패널로 이동
                     panel1.setVisible(false);
-                    add(panel2);
                     panel2.setVisible(true);
                 }
             }
@@ -183,18 +217,106 @@ public class signUpPage extends JFrame {
         panel1.add(nextButton);
         //이메일 포맷확인은 보류
 
-
         //패널 2~...에서 설문조사 정보 입력받기
-        //다 하고 마지막 제출때  setVisible(false);
+        //이전 설문조사로 되돌아가기 버튼
+        JButton rollBackButton2 = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\rollback.png")));
+        rollBackButton2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panel2.setVisible(false);
+                panel1.setVisible(true);
+            }
+        });
+        rollBackButton2.setFont(ButtonFont);
+        rollBackButton2.setBounds(155, 105, 80, 80);
+        rollBackButton2.setContentAreaFilled(false);
+
+        panel2.add(rollBackButton2);
+
+        //관심분야 버튼을 누르면 관심분야별 패널 전환(같은 프레임)
+        //안내 글
+        JLabel text = new JLabel();
+        text.setText("관심 분야를 선택해주세요!");
+        text.setFont(BigFont);
+        text.setBounds(300 ,180, 500, 70);
+        panel2.add(text);
+
+        //운동 선택 버튼
+        JButton excerciseButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\excercise.png")));
+        excerciseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //panelExercise로 전환
+                panel2.setVisible(false);
+                panelExcercise.setVisible(true);
+            }
+        });
+        excerciseButton.setFont(ButtonFont);
+        excerciseButton.setBounds(300, 310, 150, 150);
+        excerciseButton.setContentAreaFilled(false);
+        panel2.add(excerciseButton);
+
+        //프로그래밍 선택 버튼
+        JButton programingButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\programing.png")));
+        programingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //panelPrograming로 전환
+                panel2.setVisible(false);
+                panelPrograming.setVisible(true);
+            }
+        });
+        programingButton.setFont(ButtonFont);
+        programingButton.setBounds(480, 310, 150, 150);
+        programingButton.setContentAreaFilled(false);
+        panel2.add(programingButton);
+
+        //취업 선택 버튼
+        JButton employButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\employ.png")));
+        employButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //panelEmploy로 전환
+                panel2.setVisible(false);
+                panelEmploy.setVisible(true);
+            }
+        });
+        employButton.setFont(ButtonFont);
+        employButton.setBounds(660, 310, 150, 150);
+        employButton.setContentAreaFilled(false);
+        panel2.add(employButton);
+
+        //각 관심분야별 패널 부분
+        //운동 패널
+
+        //프로그래밍 패널
+
+        //운동 패널
 
     }
 
     //myPanel정의 후 사용
-    class myPanel extends JPanel{
+    class myPanel1 extends JPanel{
         @Override
         public void paintComponent(Graphics g) {
             Dimension d = getSize();
-            ImageIcon image = new ImageIcon("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\background.png");
+            ImageIcon image = new ImageIcon("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\background2.png");
+            g.drawImage(image.getImage(), 0, 0, d.width, d.height, null);
+        }
+    }
+    class myPanel2 extends JPanel{
+        @Override
+        public void paintComponent(Graphics g) {
+            Dimension d = getSize();
+            ImageIcon image = new ImageIcon("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\background3.png");
+            g.drawImage(image.getImage(), 0, 0, d.width, d.height, null);
+        }
+    }
+    class myPanel3 extends JPanel{
+        @Override
+        public void paintComponent(Graphics g) {
+            Dimension d = getSize();
+            ImageIcon image = new ImageIcon("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\signUpPage\\background4.png");
             g.drawImage(image.getImage(), 0, 0, d.width, d.height, null);
         }
     }

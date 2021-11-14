@@ -33,24 +33,24 @@ public class loginPage extends JFrame{
         Label idLabel = new Label();
         idLabel.setText("USER ID");
         idLabel.setFont(ButtonFont);
-        idLabel.setBounds(320, 200, 88, 30);
+        idLabel.setBounds(390, 230, 88, 30);
         loginpanel.add(idLabel);
 
         TextField idText = new TextField();
         idText.setFont(ButtonFont);
-        idText.setBounds(320, 235, 370, 30);
+        idText.setBounds(390, 265, 370, 30);
         loginpanel.add(idText);
 
         //비밀번호 입력
         Label pwdLabel = new Label();
         pwdLabel.setText("PASSWORD");
         pwdLabel.setFont(ButtonFont);
-        pwdLabel.setBounds(320, 280, 125, 30);
+        pwdLabel.setBounds(390, 310, 125, 30);
         loginpanel.add(pwdLabel);
 
         TextField pwdText = new TextField();
         pwdText.setFont(ButtonFont);
-        pwdText.setBounds(320, 315, 370, 30);
+        pwdText.setBounds(390, 345, 370, 30);
         pwdText.setEchoChar('*');
         loginpanel.add(pwdText);
 
@@ -85,13 +85,14 @@ public class loginPage extends JFrame{
                         pwdText.setText("");
                     } else{
                         p.setVisible(true);
-                        setVisible(false);
+                        //현재 프레임만 끄기
+                        dispose();
                     }
                 }
             }
         });
         loginButton.setFont(ButtonFont);
-        loginButton.setBounds(320, 355, 180, 80);
+        loginButton.setBounds(390, 385, 180, 80);
         loginpanel.add(loginButton);
 
         //회원가입 버튼
@@ -105,7 +106,7 @@ public class loginPage extends JFrame{
         });
 
         signUpButton.setFont(ButtonFont);
-        signUpButton.setBounds(510, 355, 180, 80);
+        signUpButton.setBounds(580, 385, 180, 80);
         loginpanel.add(signUpButton);
 
     }
@@ -115,7 +116,7 @@ public class loginPage extends JFrame{
         @Override
         public void paintComponent(Graphics g) {
             Dimension d = getSize();
-            ImageIcon image = new ImageIcon("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\loginPage\\background.png");
+            ImageIcon image = new ImageIcon("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\loginPage\\background1.png");
             g.drawImage(image.getImage(), 0, 0, d.width, d.height, null);
         }
     }
