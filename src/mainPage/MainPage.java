@@ -100,7 +100,7 @@ public class mainPage extends JFrame {
         @Override
         public void paintComponent(Graphics g) {
             Dimension d = getSize();
-            ImageIcon image = new ImageIcon("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\mainPage\\1background.png");
+            ImageIcon image = new ImageIcon("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\mainPage\\background1.png");
             g.drawImage(image.getImage(), 0, 0, d.width, d.height, null);
         }
     }
