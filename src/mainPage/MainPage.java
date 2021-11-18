@@ -1,6 +1,7 @@
 package mainPage;
 
 import loginPage.loginPage;
+import forumPage.forumPage;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,7 +10,7 @@ import java.awt.event.ActionListener;
 @SuppressWarnings("serial")
 public class mainPage extends JFrame {
     private Font ButtonFont = new Font("나눔고딕", Font.PLAIN, 20);;
-    private myPanel mainpanel = new myPanel();
+    public myPanel mainpanel = new myPanel();
 
     public mainPage() {
         //프레임 설정
@@ -17,7 +18,7 @@ public class mainPage extends JFrame {
         setVisible(false);
         setLayout(null);
         setResizable(false);
-        setSize(1100, 824);
+        setSize(1115, 824);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(mainpanel);
 
@@ -87,8 +88,8 @@ public class mainPage extends JFrame {
         button5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //여기에 게시판 페이지로 이동하는 부분 작성
                 JOptionPane.showMessageDialog(null, "게시판으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+                forumPage forum = new forumPage();
             }
         });
         button5.setFont(ButtonFont);

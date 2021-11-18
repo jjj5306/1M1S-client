@@ -38,7 +38,7 @@ public class signUpPage extends JFrame {
         add(panelEmploy2);
         setLayout(null);
         setResizable(false);
-        setSize(1100, 824);
+        setSize(1115, 824);
         //x누르면 현재 프레임만 끔
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

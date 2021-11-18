@@ -21,7 +21,7 @@ public class loginPage extends JFrame{
         setVisible(true);
         setLayout(null);
         setResizable(false);
-        setSize(1100, 824);
+        setSize(1115, 824);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(loginpanel);
 
