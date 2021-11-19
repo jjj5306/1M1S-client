@@ -201,18 +201,11 @@ public class signUpPage extends JFrame {
                     passwd2Text.setText("");
                 } else {
                     //기본 인적 사항 서버로 전송
-                    var userValues_excercise = new HashMap<String, String>() {{
-                        put("name", nameText.getText());
-                        if (manBox.isSelected()) put("gender", "man");
-                        else put("gender", "woman");
-                        put("nickname", nickNameText.getText());
-                        put("email", emailText.getText());
-                        put("username", userIdText.getText());
-                        put("password", passwdText.getText());
-                    }};
-                    var userValues_excercise_objectMapper = new ObjectMapper();
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    MemberInformation memberInformation = new MemberInformation(nameText.getText(), nickNameText.getText(), emailText.getText(), manBox.isSelected(), userIdText.getText(), passwdText.getText());
+
                     try {
-                        String requestBody = userValues_excercise_objectMapper.writeValueAsString(userValues_excercise);
+                        String requestBody = objectMapper.writeValueAsString(memberInformation);
                         System.out.println(requestBody);
                     } catch (JsonProcessingException ex) {
                         ex.printStackTrace();
@@ -1588,6 +1581,52 @@ public class signUpPage extends JFrame {
         employ2Index2Button.setBounds(170, 235, 70, 50);
         employ2Index2Button.setContentAreaFilled(false);
         panelEmploy2.add(employ2Index2Button);
+    }
+
+    public class MemberInformation{
+        private String name;
+        private String nickname;
+        private String email;
+        private String gender;
+        private Member member;
+        public MemberInformation(String name, String nickname, String email, boolean man, String username, String password){
+           this.name = name;
+           this.nickname = nickname;
+           this.email = email;
+           if(man) this.gender = "man";
+           else this.gender = "woman";
+           member = new Member(username, password);
+        }
+        public String getName() {
+            return name;
+        }
+        public String getNickname(){
+            return nickname;
+        }
+        public String getEmail() {
+            return email;
+        }
+        public String getGender() {
+            return gender;
+        }
+        public Member getMember() {
+            return member;
+        }
+    }
+
+    public class Member{
+        private String username;
+        private String password;
+        public Member(String username, String password){
+            this.username = username;
+            this.password = password;
+        }
+        public String getUsername() {
+            return username;
+        }
+        public String getPassword() {
+            return password;
+        }
     }
 
     //myPanel정의 후 사용

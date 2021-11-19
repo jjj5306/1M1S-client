@@ -282,7 +282,7 @@ public class forumPage extends JFrame {
         employForumProgramingButton.setText("프로그래밍");
         employForumProgramingButton.setFont(ButtonFont);
         employForumProgramingButton.setBounds(310, 20, 150, 80);
-        employForumProgramingButton.setContentAreaFilled(true);
+        employForumProgramingButton.setContentAreaFilled(false);
         panelForumEmploy.add(employForumProgramingButton);
 
         //취업 갱신 버튼
