@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
-import loginPage.loginPage;
+import db.*;
 
 @SuppressWarnings("serial")
 public class signUpPage extends JFrame {
@@ -210,7 +210,6 @@ public class signUpPage extends JFrame {
                     } catch (JsonProcessingException ex) {
                         ex.printStackTrace();
                     }
-
                     //다음 패널로 이동
                     panel1.setVisible(false);
                     panel2.setVisible(true);
@@ -1581,52 +1580,6 @@ public class signUpPage extends JFrame {
         employ2Index2Button.setBounds(170, 235, 70, 50);
         employ2Index2Button.setContentAreaFilled(false);
         panelEmploy2.add(employ2Index2Button);
-    }
-
-    public class MemberInformation{
-        private String name;
-        private String nickname;
-        private String email;
-        private String gender;
-        private Member member;
-        public MemberInformation(String name, String nickname, String email, boolean man, String username, String password){
-           this.name = name;
-           this.nickname = nickname;
-           this.email = email;
-           if(man) this.gender = "man";
-           else this.gender = "woman";
-           member = new Member(username, password);
-        }
-        public String getName() {
-            return name;
-        }
-        public String getNickname(){
-            return nickname;
-        }
-        public String getEmail() {
-            return email;
-        }
-        public String getGender() {
-            return gender;
-        }
-        public Member getMember() {
-            return member;
-        }
-    }
-
-    public class Member{
-        private String username;
-        private String password;
-        public Member(String username, String password){
-            this.username = username;
-            this.password = password;
-        }
-        public String getUsername() {
-            return username;
-        }
-        public String getPassword() {
-            return password;
-        }
     }
 
     //myPanel정의 후 사용

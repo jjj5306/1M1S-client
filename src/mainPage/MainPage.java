@@ -93,8 +93,21 @@ public class mainPage extends JFrame {
             }
         });
         button5.setFont(ButtonFont);
-        button5.setBounds(00, 440, 200, 384);
+        button5.setBounds(0, 440, 200, 110);
         mainpanel.add(button5);
+
+        //커리큘럼 버튼 설정
+        //게시판 버튼 설정
+        JButton button6 = new JButton("커리큘럼");
+        button6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "커리큘럼으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        button6.setFont(ButtonFont);
+        button6.setBounds(0, 550, 200, 250);
+        mainpanel.add(button6);
     }
 
     class myPanel extends JPanel{
