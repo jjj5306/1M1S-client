@@ -13,7 +13,7 @@ import db.*;
 public class signUpPage extends JFrame {
     private Long interest_selected = Long.parseLong(Integer.toString(0)); //유저 관심 분야, 순서대로 운동, 프로그래밍, 취업
     private Font BigFont = new Font("나눔고딕", Font.PLAIN, 30);
-    private Font ButtonFont = new Font("나눔고딕", Font.PLAIN, 20);
+    private final Font mainFont = new Font("나눔고딕", Font.PLAIN, 20);
     private Font smallFont = new Font("나눔고딕", Font.PLAIN, 15);
     private myPanel1 panel1 = new myPanel1();
     private myPanel2 panel2 = new myPanel2();
@@ -86,7 +86,7 @@ public class signUpPage extends JFrame {
                 dispose();
             }
         });
-        rollBackButton.setFont(ButtonFont);
+        rollBackButton.setFont(mainFont);
         rollBackButton.setBounds(155, 105, 80, 80);
         rollBackButton.setContentAreaFilled(false);
         panel1.add(rollBackButton);
@@ -94,67 +94,67 @@ public class signUpPage extends JFrame {
         //이름 입력받기
         Label nameLabel = new Label();
         nameLabel.setText("Name");
-        nameLabel.setFont(ButtonFont);
+        nameLabel.setFont(mainFont);
         nameLabel.setBounds(320, 200, 60, 30);
         panel1.add(nameLabel);
         TextField nameText = new TextField();
-        nameText.setFont(ButtonFont);
+        nameText.setFont(mainFont);
         nameText.setBounds(390, 200, 100, 30);
         panel1.add(nameText);
 
         //성별 입력받기
         JCheckBox manBox = new JCheckBox();
         manBox.setText("man");
-        manBox.setFont(ButtonFont);
+        manBox.setFont(mainFont);
         manBox.setBounds(580, 200, 70, 30);
         panel1.add(manBox);
         JCheckBox womanBox = new JCheckBox();
         womanBox.setText("woman");
-        womanBox.setFont(ButtonFont);
+        womanBox.setFont(mainFont);
         womanBox.setBounds(660, 200, 97, 30);
         panel1.add(womanBox);
 
         //닉네임 입력받기
         Label nicknameLabel = new Label();
         nicknameLabel.setText("Nickname : ");
-        nicknameLabel.setFont(ButtonFont);
+        nicknameLabel.setFont(mainFont);
         nicknameLabel.setBounds(320, 260, 95, 30);
         panel1.add(nicknameLabel);
         TextField nickNameText = new TextField();
-        nickNameText.setFont(ButtonFont);
+        nickNameText.setFont(mainFont);
         nickNameText.setBounds(430, 260, 100, 30);
         panel1.add(nickNameText);
 
         //이메일 입력받기
         Label emailIdLabel = new Label();
         emailIdLabel.setText("E-mail");
-        emailIdLabel.setFont(ButtonFont);
+        emailIdLabel.setFont(mainFont);
         emailIdLabel.setBounds(320, 320, 70, 30);
         panel1.add(emailIdLabel);
         TextField emailText = new TextField();
-        emailText.setFont(ButtonFont);
+        emailText.setFont(mainFont);
         emailText.setBounds(400, 320, 300, 30);
         panel1.add(emailText);
 
         //아이디 입력받기
         Label userIdLabel = new Label();
         userIdLabel.setText("User ID");
-        userIdLabel.setFont(ButtonFont);
+        userIdLabel.setFont(mainFont);
         userIdLabel.setBounds(320, 380, 70, 30);
         panel1.add(userIdLabel);
         TextField userIdText = new TextField();
-        userIdText.setFont(ButtonFont);
+        userIdText.setFont(mainFont);
         userIdText.setBounds(400, 380, 100, 30);
         panel1.add(userIdText);
 
         //비밀번호
         Label passwdLabel = new Label();
         passwdLabel.setText("PASSWORD");
-        passwdLabel.setFont(ButtonFont);
+        passwdLabel.setFont(mainFont);
         passwdLabel.setBounds(320, 440, 125, 30);
         panel1.add(passwdLabel);
         TextField passwdText = new TextField();
-        passwdText.setFont(ButtonFont);
+        passwdText.setFont(mainFont);
         passwdText.setBounds(460, 440, 220, 30);
         passwdText.setEchoChar('*');
         panel1.add(passwdText);
@@ -162,11 +162,11 @@ public class signUpPage extends JFrame {
         //비밀번호 확인
         Label passwd2Label = new Label();
         passwd2Label.setText("PASSWORD Check");
-        passwd2Label.setFont(ButtonFont);
+        passwd2Label.setFont(mainFont);
         passwd2Label.setBounds(320, 500, 190, 30);
         panel1.add(passwd2Label);
         TextField passwd2Text = new TextField();
-        passwd2Text.setFont(ButtonFont);
+        passwd2Text.setFont(mainFont);
         passwd2Text.setBounds(525, 500, 220, 30);
         passwd2Text.setEchoChar('*');
         panel1.add(passwd2Text);
@@ -216,7 +216,7 @@ public class signUpPage extends JFrame {
                 }
             }
         });
-        nextButton.setFont(ButtonFont);
+        nextButton.setFont(mainFont);
         nextButton.setBounds(550, 600, 120, 50);
         panel1.add(nextButton);
         //이메일 포맷확인은 보류
@@ -242,13 +242,13 @@ public class signUpPage extends JFrame {
                 interest_selected = Long.parseLong(Integer.toString(1));
             }
         });
-        excerciseButton.setFont(ButtonFont);
+        excerciseButton.setFont(mainFont);
         excerciseButton.setBounds(300, 310, 150, 150);
         excerciseButton.setContentAreaFilled(false);
         panel2.add(excerciseButton);
         JLabel excerciseLabel = new JLabel();
         excerciseLabel.setText("운동");
-        excerciseLabel.setFont(ButtonFont);
+        excerciseLabel.setFont(mainFont);
         excerciseLabel.setBounds(355, 470, 60, 30);
         panel2.add(excerciseLabel);
 
@@ -263,13 +263,13 @@ public class signUpPage extends JFrame {
                 interest_selected = Long.parseLong(Integer.toString(2));
             }
         });
-        programingButton.setFont(ButtonFont);
+        programingButton.setFont(mainFont);
         programingButton.setBounds(480, 310, 150, 150);
         programingButton.setContentAreaFilled(false);
         panel2.add(programingButton);
         JLabel programingLabel = new JLabel();
         programingLabel.setText("프로그래밍");
-        programingLabel.setFont(ButtonFont);
+        programingLabel.setFont(mainFont);
         programingLabel.setBounds(505, 470, 150, 30);
         panel2.add(programingLabel);
 
@@ -284,13 +284,13 @@ public class signUpPage extends JFrame {
                 interest_selected = Long.parseLong(Integer.toString(3));
             }
         });
-        employButton.setFont(ButtonFont);
+        employButton.setFont(mainFont);
         employButton.setBounds(660, 310, 150, 150);
         employButton.setContentAreaFilled(false);
         panel2.add(employButton);
         JLabel employLabel = new JLabel();
         employLabel.setText("취업 준비");
-        employLabel.setFont(ButtonFont);
+        employLabel.setFont(mainFont);
         employLabel.setBounds(695, 470, 120, 30);
         panel2.add(employLabel);
 
@@ -310,7 +310,7 @@ public class signUpPage extends JFrame {
                 interest_selected = Long.parseLong(Integer.toString(0));
             }
         });
-        excercise1RollBackButton.setFont(ButtonFont);
+        excercise1RollBackButton.setFont(mainFont);
         excercise1RollBackButton.setBounds(155, 105, 80, 80);
         excercise1RollBackButton.setContentAreaFilled(false);
         panelExcercise1.add(excercise1RollBackButton);
@@ -328,21 +328,21 @@ public class signUpPage extends JFrame {
         //설문조사 1의 선택지 1
         JCheckBox excerciseSurvey1Ans1 = new JCheckBox();
         excerciseSurvey1Ans1.setText(ansarr[0]);
-        excerciseSurvey1Ans1.setFont(ButtonFont);
+        excerciseSurvey1Ans1.setFont(mainFont);
         excerciseSurvey1Ans1.setBounds(330, 190, 150, 50);
         excerciseSurvey1Ans1.setContentAreaFilled(false);
         panelExcercise1.add(excerciseSurvey1Ans1);
         //설문조사 1의 선택지 2
         JCheckBox excerciseSurvey1Ans2 = new JCheckBox();
         excerciseSurvey1Ans2.setText(ansarr[1]);
-        excerciseSurvey1Ans2.setFont(ButtonFont);
+        excerciseSurvey1Ans2.setFont(mainFont);
         excerciseSurvey1Ans2.setBounds(500, 190, 150, 50);
         excerciseSurvey1Ans2.setContentAreaFilled(false);
         panelExcercise1.add(excerciseSurvey1Ans2);
         //설문조사 1의 선택지 3
         JCheckBox excerciseSurvey1Ans3 = new JCheckBox();
         excerciseSurvey1Ans3.setText(ansarr[2]);
-        excerciseSurvey1Ans3.setFont(ButtonFont);
+        excerciseSurvey1Ans3.setFont(mainFont);
         excerciseSurvey1Ans3.setBounds(650, 190, 150, 50);
         excerciseSurvey1Ans3.setContentAreaFilled(false);
         panelExcercise1.add(excerciseSurvey1Ans3);
@@ -359,21 +359,21 @@ public class signUpPage extends JFrame {
         //설문조사 2의 선택지 1
         JCheckBox excerciseSurvey2Ans1 = new JCheckBox();
         excerciseSurvey2Ans1.setText(ansarr[0]);
-        excerciseSurvey2Ans1.setFont(ButtonFont);
+        excerciseSurvey2Ans1.setFont(mainFont);
         excerciseSurvey2Ans1.setBounds(330, 340, 150, 50);
         excerciseSurvey2Ans1.setContentAreaFilled(false);
         panelExcercise1.add(excerciseSurvey2Ans1);
         //설문조사 2의 선택지 2
         JCheckBox excerciseSurvey2Ans2 = new JCheckBox();
         excerciseSurvey2Ans2.setText(ansarr[1]);
-        excerciseSurvey2Ans2.setFont(ButtonFont);
+        excerciseSurvey2Ans2.setFont(mainFont);
         excerciseSurvey2Ans2.setBounds(500, 340, 150, 50);
         excerciseSurvey2Ans2.setContentAreaFilled(false);
         panelExcercise1.add(excerciseSurvey2Ans2);
         //설문조사 2의 선택지 3
         JCheckBox excerciseSurvey2Ans3 = new JCheckBox();
         excerciseSurvey2Ans3.setText(ansarr[2]);
-        excerciseSurvey2Ans3.setFont(ButtonFont);
+        excerciseSurvey2Ans3.setFont(mainFont);
         excerciseSurvey2Ans3.setBounds(650, 340, 150, 50);
         excerciseSurvey2Ans3.setContentAreaFilled(false);
         panelExcercise1.add(excerciseSurvey2Ans3);
@@ -390,21 +390,21 @@ public class signUpPage extends JFrame {
         //설문조사 3의 선택지 1
         JCheckBox excerciseSurvey3Ans1 = new JCheckBox();
         excerciseSurvey3Ans1.setText(ansarr[0]);
-        excerciseSurvey3Ans1.setFont(ButtonFont);
+        excerciseSurvey3Ans1.setFont(mainFont);
         excerciseSurvey3Ans1.setBounds(330, 490, 150, 50);
         excerciseSurvey3Ans1.setContentAreaFilled(false);
         panelExcercise1.add(excerciseSurvey3Ans1);
         //설문조사 3의 선택지 2
         JCheckBox excerciseSurvey3Ans2 = new JCheckBox();
         excerciseSurvey3Ans2.setText(ansarr[1]);
-        excerciseSurvey3Ans2.setFont(ButtonFont);
+        excerciseSurvey3Ans2.setFont(mainFont);
         excerciseSurvey3Ans2.setBounds(500, 490, 150, 50);
         excerciseSurvey3Ans2.setContentAreaFilled(false);
         panelExcercise1.add(excerciseSurvey3Ans2);
         //설문조사 3의 선택지 3
         JCheckBox excerciseSurvey3Ans3 = new JCheckBox();
         excerciseSurvey3Ans3.setText(ansarr[2]);
-        excerciseSurvey3Ans3.setFont(ButtonFont);
+        excerciseSurvey3Ans3.setFont(mainFont);
         excerciseSurvey3Ans3.setBounds(650, 490, 150, 50);
         excerciseSurvey3Ans3.setContentAreaFilled(false);
         panelExcercise1.add(excerciseSurvey3Ans3);
@@ -456,7 +456,7 @@ public class signUpPage extends JFrame {
             }
         });
         excercise1NextButton.setText("Next");
-        excercise1NextButton.setFont(ButtonFont);
+        excercise1NextButton.setFont(mainFont);
         excercise1NextButton.setBounds(700, 600, 80, 50);
         panelExcercise1.add(excercise1NextButton);
 
@@ -467,7 +467,7 @@ public class signUpPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
             }
         });
-        excercise1Index1Button.setFont(ButtonFont);
+        excercise1Index1Button.setFont(mainFont);
         excercise1Index1Button.setBounds(170, 185, 70, 50);
         excercise1Index1Button.setContentAreaFilled(false);
         panelExcercise1.add(excercise1Index1Button);
@@ -518,7 +518,7 @@ public class signUpPage extends JFrame {
                 }
             }
         });
-        excercise1Index2Button.setFont(ButtonFont);
+        excercise1Index2Button.setFont(mainFont);
         excercise1Index2Button.setBounds(170, 235, 70, 50);
         excercise1Index2Button.setContentAreaFilled(false);
         panelExcercise1.add(excercise1Index2Button);
@@ -534,7 +534,7 @@ public class signUpPage extends JFrame {
                 interest_selected = Long.parseLong(Integer.toString(0));
             }
         });
-        excercise2RollBackButton.setFont(ButtonFont);
+        excercise2RollBackButton.setFont(mainFont);
         excercise2RollBackButton.setBounds(155, 105, 80, 80);
         excercise2RollBackButton.setContentAreaFilled(false);
         panelExcercise2.add(excercise2RollBackButton);
@@ -551,21 +551,21 @@ public class signUpPage extends JFrame {
         //설문조사 4의 선택지 1
         JCheckBox excerciseSurvey4Ans1 = new JCheckBox();
         excerciseSurvey4Ans1.setText(ansarr[0]);
-        excerciseSurvey4Ans1.setFont(ButtonFont);
+        excerciseSurvey4Ans1.setFont(mainFont);
         excerciseSurvey4Ans1.setBounds(330, 190, 150, 50);
         excerciseSurvey4Ans1.setContentAreaFilled(false);
         panelExcercise2.add(excerciseSurvey4Ans1);
         //설문조사 4의 선택지 2
         JCheckBox excerciseSurvey4Ans2 = new JCheckBox();
         excerciseSurvey4Ans2.setText(ansarr[1]);
-        excerciseSurvey4Ans2.setFont(ButtonFont);
+        excerciseSurvey4Ans2.setFont(mainFont);
         excerciseSurvey4Ans2.setBounds(500, 190, 150, 50);
         excerciseSurvey4Ans2.setContentAreaFilled(false);
         panelExcercise2.add(excerciseSurvey4Ans2);
         //설문조사 1의 선택지 3
         JCheckBox excerciseSurvey4Ans3 = new JCheckBox();
         excerciseSurvey4Ans3.setText(ansarr[2]);
-        excerciseSurvey4Ans3.setFont(ButtonFont);
+        excerciseSurvey4Ans3.setFont(mainFont);
         excerciseSurvey4Ans3.setBounds(650, 190, 150, 50);
         excerciseSurvey4Ans3.setContentAreaFilled(false);
         panelExcercise2.add(excerciseSurvey4Ans3);
@@ -582,21 +582,21 @@ public class signUpPage extends JFrame {
         //설문조사 5의 선택지 1
         JCheckBox excerciseSurvey5Ans1 = new JCheckBox();
         excerciseSurvey5Ans1.setText(ansarr[0]);
-        excerciseSurvey5Ans1.setFont(ButtonFont);
+        excerciseSurvey5Ans1.setFont(mainFont);
         excerciseSurvey5Ans1.setBounds(330, 340, 150, 50);
         excerciseSurvey5Ans1.setContentAreaFilled(false);
         panelExcercise2.add(excerciseSurvey5Ans1);
         //설문조사 5의 선택지 2
         JCheckBox excerciseSurvey5Ans2 = new JCheckBox();
         excerciseSurvey5Ans2.setText(ansarr[1]);
-        excerciseSurvey5Ans2.setFont(ButtonFont);
+        excerciseSurvey5Ans2.setFont(mainFont);
         excerciseSurvey5Ans2.setBounds(500, 340, 150, 50);
         excerciseSurvey5Ans2.setContentAreaFilled(false);
         panelExcercise2.add(excerciseSurvey5Ans2);
         //설문조사 5의 선택지 3
         JCheckBox excerciseSurvey5Ans3 = new JCheckBox();
         excerciseSurvey5Ans3.setText(ansarr[2]);
-        excerciseSurvey5Ans3.setFont(ButtonFont);
+        excerciseSurvey5Ans3.setFont(mainFont);
         excerciseSurvey5Ans3.setBounds(650, 340, 150, 50);
         excerciseSurvey5Ans3.setContentAreaFilled(false);
         panelExcercise2.add(excerciseSurvey5Ans3);
@@ -613,21 +613,21 @@ public class signUpPage extends JFrame {
         //설문조사 6의 선택지 1
         JCheckBox excerciseSurvey6Ans1 = new JCheckBox();
         excerciseSurvey6Ans1.setText(ansarr[0]);
-        excerciseSurvey6Ans1.setFont(ButtonFont);
+        excerciseSurvey6Ans1.setFont(mainFont);
         excerciseSurvey6Ans1.setBounds(330, 490, 150, 50);
         excerciseSurvey6Ans1.setContentAreaFilled(false);
         panelExcercise2.add(excerciseSurvey6Ans1);
         //설문조사 6의 선택지 2
         JCheckBox excerciseSurvey6Ans2 = new JCheckBox();
         excerciseSurvey6Ans2.setText(ansarr[1]);
-        excerciseSurvey6Ans2.setFont(ButtonFont);
+        excerciseSurvey6Ans2.setFont(mainFont);
         excerciseSurvey6Ans2.setBounds(500, 490, 150, 50);
         excerciseSurvey6Ans2.setContentAreaFilled(false);
         panelExcercise2.add(excerciseSurvey6Ans2);
         //설문조사 6의 선택지 3
         JCheckBox excerciseSurvey6Ans3 = new JCheckBox();
         excerciseSurvey6Ans3.setText(ansarr[2]);
-        excerciseSurvey6Ans3.setFont(ButtonFont);
+        excerciseSurvey6Ans3.setFont(mainFont);
         excerciseSurvey6Ans3.setBounds(650, 490, 150, 50);
         excerciseSurvey6Ans3.setContentAreaFilled(false);
         panelExcercise2.add(excerciseSurvey6Ans3);
@@ -695,7 +695,7 @@ public class signUpPage extends JFrame {
             }
         });
         excercise2NextButton.setText("Final Submit");
-        excercise2NextButton.setFont(ButtonFont);
+        excercise2NextButton.setFont(mainFont);
         excercise2NextButton.setBounds(620, 600, 160, 50);
         panelExcercise2.add(excercise2NextButton);
 
@@ -708,7 +708,7 @@ public class signUpPage extends JFrame {
                 panelExcercise1.setVisible(true);
             }
         });
-        excercise2Index1Button.setFont(ButtonFont);
+        excercise2Index1Button.setFont(mainFont);
         excercise2Index1Button.setBounds(170, 185, 70, 50);
         excercise2Index1Button.setContentAreaFilled(false);
         panelExcercise2.add(excercise2Index1Button);
@@ -720,7 +720,7 @@ public class signUpPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
             }
         });
-        excercise2Index2Button.setFont(ButtonFont);
+        excercise2Index2Button.setFont(mainFont);
         excercise2Index2Button.setBounds(170, 235, 70, 50);
         excercise2Index2Button.setContentAreaFilled(false);
         panelExcercise2.add(excercise2Index2Button);
@@ -738,7 +738,7 @@ public class signUpPage extends JFrame {
                 interest_selected = Long.parseLong(Integer.toString(0));
             }
         });
-        programingRollBackButton.setFont(ButtonFont);
+        programingRollBackButton.setFont(mainFont);
         programingRollBackButton.setBounds(155, 105, 80, 80);
         programingRollBackButton.setContentAreaFilled(false);
         panelPrograming1.add(programingRollBackButton);
@@ -756,21 +756,21 @@ public class signUpPage extends JFrame {
         //설문조사 1의 선택지 1
         JCheckBox programingSurvey1Ans1 = new JCheckBox();
         programingSurvey1Ans1.setText(ansarr[0]);
-        programingSurvey1Ans1.setFont(ButtonFont);
+        programingSurvey1Ans1.setFont(mainFont);
         programingSurvey1Ans1.setBounds(330, 190, 150, 50);
         programingSurvey1Ans1.setContentAreaFilled(false);
         panelPrograming1.add(programingSurvey1Ans1);
         //설문조사 1의 선택지 2
         JCheckBox programingSurvey1Ans2 = new JCheckBox();
         programingSurvey1Ans2.setText(ansarr[1]);
-        programingSurvey1Ans2.setFont(ButtonFont);
+        programingSurvey1Ans2.setFont(mainFont);
         programingSurvey1Ans2.setBounds(500, 190, 150, 50);
         programingSurvey1Ans2.setContentAreaFilled(false);
         panelPrograming1.add(programingSurvey1Ans2);
         //설문조사 1의 선택지 3
         JCheckBox programingSurvey1Ans3 = new JCheckBox();
         programingSurvey1Ans3.setText(ansarr[2]);
-        programingSurvey1Ans3.setFont(ButtonFont);
+        programingSurvey1Ans3.setFont(mainFont);
         programingSurvey1Ans3.setBounds(650, 190, 150, 50);
         programingSurvey1Ans3.setContentAreaFilled(false);
         panelPrograming1.add(programingSurvey1Ans3);
@@ -787,21 +787,21 @@ public class signUpPage extends JFrame {
         //설문조사 2의 선택지 1
         JCheckBox programingSurvey2Ans1 = new JCheckBox();
         programingSurvey2Ans1.setText(ansarr[0]);
-        programingSurvey2Ans1.setFont(ButtonFont);
+        programingSurvey2Ans1.setFont(mainFont);
         programingSurvey2Ans1.setBounds(330, 340, 150, 50);
         programingSurvey2Ans1.setContentAreaFilled(false);
         panelPrograming1.add(programingSurvey2Ans1);
         //설문조사 2의 선택지 2
         JCheckBox programingSurvey2Ans2 = new JCheckBox();
         programingSurvey2Ans2.setText(ansarr[1]);
-        programingSurvey2Ans2.setFont(ButtonFont);
+        programingSurvey2Ans2.setFont(mainFont);
         programingSurvey2Ans2.setBounds(500, 340, 150, 50);
         programingSurvey2Ans2.setContentAreaFilled(false);
         panelPrograming1.add(programingSurvey2Ans2);
         //설문조사 2의 선택지 3
         JCheckBox programingSurvey2Ans3 = new JCheckBox();
         programingSurvey2Ans3.setText(ansarr[2]);
-        programingSurvey2Ans3.setFont(ButtonFont);
+        programingSurvey2Ans3.setFont(mainFont);
         programingSurvey2Ans3.setBounds(650, 340, 150, 50);
         programingSurvey2Ans3.setContentAreaFilled(false);
         panelPrograming1.add(programingSurvey2Ans3);
@@ -818,21 +818,21 @@ public class signUpPage extends JFrame {
         //설문조사 3의 선택지 1
         JCheckBox programingSurvey3Ans1 = new JCheckBox();
         programingSurvey3Ans1.setText(ansarr[0]);
-        programingSurvey3Ans1.setFont(ButtonFont);
+        programingSurvey3Ans1.setFont(mainFont);
         programingSurvey3Ans1.setBounds(330, 490, 150, 50);
         programingSurvey3Ans1.setContentAreaFilled(false);
         panelPrograming1.add(programingSurvey3Ans1);
         //설문조사 3의 선택지 2
         JCheckBox programingSurvey3Ans2 = new JCheckBox();
         programingSurvey3Ans2.setText(ansarr[1]);
-        programingSurvey3Ans2.setFont(ButtonFont);
+        programingSurvey3Ans2.setFont(mainFont);
         programingSurvey3Ans2.setBounds(500, 490, 150, 50);
         programingSurvey3Ans2.setContentAreaFilled(false);
         panelPrograming1.add(programingSurvey3Ans2);
         //설문조사 3의 선택지 3
         JCheckBox programingSurvey3Ans3 = new JCheckBox();
         programingSurvey3Ans3.setText(ansarr[2]);
-        programingSurvey3Ans3.setFont(ButtonFont);
+        programingSurvey3Ans3.setFont(mainFont);
         programingSurvey3Ans3.setBounds(650, 490, 150, 50);
         programingSurvey3Ans3.setContentAreaFilled(false);
         panelPrograming1.add(programingSurvey3Ans3);
@@ -884,7 +884,7 @@ public class signUpPage extends JFrame {
             }
         });
         programing1NextButton.setText("Next");
-        programing1NextButton.setFont(ButtonFont);
+        programing1NextButton.setFont(mainFont);
         programing1NextButton.setBounds(700, 600, 80, 50);
         panelPrograming1.add(programing1NextButton);
 
@@ -895,7 +895,7 @@ public class signUpPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
             }
         });
-        programing1Index1Button.setFont(ButtonFont);
+        programing1Index1Button.setFont(mainFont);
         programing1Index1Button.setBounds(170, 185, 70, 50);
         programing1Index1Button.setContentAreaFilled(false);
         panelPrograming1.add(programing1Index1Button);
@@ -946,7 +946,7 @@ public class signUpPage extends JFrame {
                 }
             }
         });
-        programing1Index2Button.setFont(ButtonFont);
+        programing1Index2Button.setFont(mainFont);
         programing1Index2Button.setBounds(170, 235, 70, 50);
         programing1Index2Button.setContentAreaFilled(false);
         panelPrograming1.add(programing1Index2Button);
@@ -962,7 +962,7 @@ public class signUpPage extends JFrame {
                 interest_selected = Long.parseLong(Integer.toString(0));
             }
         });
-        programing2RollBackButton.setFont(ButtonFont);
+        programing2RollBackButton.setFont(mainFont);
         programing2RollBackButton.setBounds(155, 105, 80, 80);
         programing2RollBackButton.setContentAreaFilled(false);
         panelPrograming2.add(programing2RollBackButton);
@@ -979,21 +979,21 @@ public class signUpPage extends JFrame {
         //설문조사 4의 선택지 1
         JCheckBox programingSurvey4Ans1 = new JCheckBox();
         programingSurvey4Ans1.setText(ansarr[0]);
-        programingSurvey4Ans1.setFont(ButtonFont);
+        programingSurvey4Ans1.setFont(mainFont);
         programingSurvey4Ans1.setBounds(330, 190, 150, 50);
         programingSurvey4Ans1.setContentAreaFilled(false);
         panelPrograming2.add(programingSurvey4Ans1);
         //설문조사 4의 선택지 2
         JCheckBox programingSurvey4Ans2 = new JCheckBox();
         programingSurvey4Ans2.setText(ansarr[1]);
-        programingSurvey4Ans2.setFont(ButtonFont);
+        programingSurvey4Ans2.setFont(mainFont);
         programingSurvey4Ans2.setBounds(500, 190, 150, 50);
         programingSurvey4Ans2.setContentAreaFilled(false);
         panelPrograming2.add(programingSurvey4Ans2);
         //설문조사 4의 선택지 3
         JCheckBox programingSurvey4Ans3 = new JCheckBox();
         programingSurvey4Ans3.setText(ansarr[2]);
-        programingSurvey4Ans3.setFont(ButtonFont);
+        programingSurvey4Ans3.setFont(mainFont);
         programingSurvey4Ans3.setBounds(650, 190, 150, 50);
         programingSurvey4Ans3.setContentAreaFilled(false);
         panelPrograming2.add(programingSurvey4Ans3);
@@ -1010,21 +1010,21 @@ public class signUpPage extends JFrame {
         //설문조사 5의 선택지 1
         JCheckBox programingSurvey5Ans1 = new JCheckBox();
         programingSurvey5Ans1.setText(ansarr[0]);
-        programingSurvey5Ans1.setFont(ButtonFont);
+        programingSurvey5Ans1.setFont(mainFont);
         programingSurvey5Ans1.setBounds(330, 340, 150, 50);
         programingSurvey5Ans1.setContentAreaFilled(false);
         panelPrograming2.add(programingSurvey5Ans1);
         //설문조사 5의 선택지 2
         JCheckBox programingSurvey5Ans2 = new JCheckBox();
         programingSurvey5Ans2.setText(ansarr[1]);
-        programingSurvey5Ans2.setFont(ButtonFont);
+        programingSurvey5Ans2.setFont(mainFont);
         programingSurvey5Ans2.setBounds(500, 340, 150, 50);
         programingSurvey5Ans2.setContentAreaFilled(false);
         panelPrograming2.add(programingSurvey5Ans2);
         //설문조사 5의 선택지 3
         JCheckBox programingSurvey5Ans3 = new JCheckBox();
         programingSurvey5Ans3.setText(ansarr[2]);
-        programingSurvey5Ans3.setFont(ButtonFont);
+        programingSurvey5Ans3.setFont(mainFont);
         programingSurvey5Ans3.setBounds(650, 340, 150, 50);
         programingSurvey5Ans3.setContentAreaFilled(false);
         panelPrograming2.add(programingSurvey5Ans3);
@@ -1041,21 +1041,21 @@ public class signUpPage extends JFrame {
         //설문조사 6의 선택지 1
         JCheckBox programingSurvey6Ans1 = new JCheckBox();
         programingSurvey6Ans1.setText(ansarr[0]);
-        programingSurvey6Ans1.setFont(ButtonFont);
+        programingSurvey6Ans1.setFont(mainFont);
         programingSurvey6Ans1.setBounds(330, 490, 150, 50);
         programingSurvey6Ans1.setContentAreaFilled(false);
         panelPrograming2.add(programingSurvey6Ans1);
         //설문조사 6의 선택지 2
         JCheckBox programingSurvey6Ans2 = new JCheckBox();
         programingSurvey6Ans2.setText(ansarr[1]);
-        programingSurvey6Ans2.setFont(ButtonFont);
+        programingSurvey6Ans2.setFont(mainFont);
         programingSurvey6Ans2.setBounds(500, 490, 150, 50);
         programingSurvey6Ans2.setContentAreaFilled(false);
         panelPrograming2.add(programingSurvey6Ans2);
         //설문조사 6의 선택지 3
         JCheckBox programingSurvey6Ans3 = new JCheckBox();
         programingSurvey6Ans3.setText(ansarr[2]);
-        programingSurvey6Ans3.setFont(ButtonFont);
+        programingSurvey6Ans3.setFont(mainFont);
         programingSurvey6Ans3.setBounds(650, 490, 150, 50);
         programingSurvey6Ans3.setContentAreaFilled(false);
         panelPrograming2.add(programingSurvey6Ans3);
@@ -1122,7 +1122,7 @@ public class signUpPage extends JFrame {
             }
         });
         programing2NextButton.setText("Final Submit");
-        programing2NextButton.setFont(ButtonFont);
+        programing2NextButton.setFont(mainFont);
         programing2NextButton.setBounds(620, 600, 160, 50);
         panelPrograming2.add(programing2NextButton);
 
@@ -1135,7 +1135,7 @@ public class signUpPage extends JFrame {
                 panelPrograming1.setVisible(true);
             }
         });
-        programing2Index1Button.setFont(ButtonFont);
+        programing2Index1Button.setFont(mainFont);
         programing2Index1Button.setBounds(170, 185, 70, 50);
         programing2Index1Button.setContentAreaFilled(false);
         panelPrograming2.add(programing2Index1Button);
@@ -1148,7 +1148,7 @@ public class signUpPage extends JFrame {
 
             }
         });
-        programing2Index2Button.setFont(ButtonFont);
+        programing2Index2Button.setFont(mainFont);
         programing2Index2Button.setBounds(170, 235, 70, 50);
         programing2Index2Button.setContentAreaFilled(false);
         panelPrograming2.add(programing2Index2Button);
@@ -1166,7 +1166,7 @@ public class signUpPage extends JFrame {
                 interest_selected = Long.parseLong(Integer.toString(0));
             }
         });
-        employRollBackButton.setFont(ButtonFont);
+        employRollBackButton.setFont(mainFont);
         employRollBackButton.setBounds(155, 105, 80, 80);
         employRollBackButton.setContentAreaFilled(false);
         panelEmploy1.add(employRollBackButton);
@@ -1184,21 +1184,21 @@ public class signUpPage extends JFrame {
         //설문조사 1의 선택지 1
         JCheckBox employSurvey1Ans1 = new JCheckBox();
         employSurvey1Ans1.setText(ansarr[0]);
-        employSurvey1Ans1.setFont(ButtonFont);
+        employSurvey1Ans1.setFont(mainFont);
         employSurvey1Ans1.setBounds(330, 190, 150, 50);
         employSurvey1Ans1.setContentAreaFilled(false);
         panelEmploy1.add(employSurvey1Ans1);
         //설문조사 1의 선택지 2
         JCheckBox employSurvey1Ans2 = new JCheckBox();
         employSurvey1Ans2.setText(ansarr[1]);
-        employSurvey1Ans2.setFont(ButtonFont);
+        employSurvey1Ans2.setFont(mainFont);
         employSurvey1Ans2.setBounds(500, 190, 150, 50);
         employSurvey1Ans2.setContentAreaFilled(false);
         panelEmploy1.add(employSurvey1Ans2);
         //설문조사 1의 선택지 3
         JCheckBox employSurvey1Ans3 = new JCheckBox();
         employSurvey1Ans3.setText(ansarr[2]);
-        employSurvey1Ans3.setFont(ButtonFont);
+        employSurvey1Ans3.setFont(mainFont);
         employSurvey1Ans3.setBounds(650, 190, 150, 50);
         employSurvey1Ans3.setContentAreaFilled(false);
         panelEmploy1.add(employSurvey1Ans3);
@@ -1215,21 +1215,21 @@ public class signUpPage extends JFrame {
         //설문조사 2의 선택지 1
         JCheckBox employSurvey2Ans1 = new JCheckBox();
         employSurvey2Ans1.setText(ansarr[0]);
-        employSurvey2Ans1.setFont(ButtonFont);
+        employSurvey2Ans1.setFont(mainFont);
         employSurvey2Ans1.setBounds(330, 340, 150, 50);
         employSurvey2Ans1.setContentAreaFilled(false);
         panelEmploy1.add(employSurvey2Ans1);
         //설문조사 2의 선택지 2
         JCheckBox employSurvey2Ans2 = new JCheckBox();
         employSurvey2Ans2.setText(ansarr[1]);
-        employSurvey2Ans2.setFont(ButtonFont);
+        employSurvey2Ans2.setFont(mainFont);
         employSurvey2Ans2.setBounds(500, 340, 150, 50);
         employSurvey2Ans2.setContentAreaFilled(false);
         panelEmploy1.add(employSurvey2Ans2);
         //설문조사 2의 선택지 3
         JCheckBox employSurvey2Ans3 = new JCheckBox();
         employSurvey2Ans3.setText(ansarr[2]);
-        employSurvey2Ans3.setFont(ButtonFont);
+        employSurvey2Ans3.setFont(mainFont);
         employSurvey2Ans3.setBounds(650, 340, 150, 50);
         employSurvey2Ans3.setContentAreaFilled(false);
         panelEmploy1.add(employSurvey2Ans3);
@@ -1246,21 +1246,21 @@ public class signUpPage extends JFrame {
         //설문조사 3의 선택지 1
         JCheckBox employSurvey3Ans1 = new JCheckBox();
         employSurvey3Ans1.setText(ansarr[0]);
-        employSurvey3Ans1.setFont(ButtonFont);
+        employSurvey3Ans1.setFont(mainFont);
         employSurvey3Ans1.setBounds(330, 490, 150, 50);
         employSurvey3Ans1.setContentAreaFilled(false);
         panelEmploy1.add(employSurvey3Ans1);
         //설문조사 3의 선택지 2
         JCheckBox employSurvey3Ans2 = new JCheckBox();
         employSurvey3Ans2.setText(ansarr[1]);
-        employSurvey3Ans2.setFont(ButtonFont);
+        employSurvey3Ans2.setFont(mainFont);
         employSurvey3Ans2.setBounds(500, 490, 150, 50);
         employSurvey3Ans2.setContentAreaFilled(false);
         panelEmploy1.add(employSurvey3Ans2);
         //설문조사 3의 선택지 3
         JCheckBox employSurvey3Ans3 = new JCheckBox();
         employSurvey3Ans3.setText(ansarr[2]);
-        employSurvey3Ans3.setFont(ButtonFont);
+        employSurvey3Ans3.setFont(mainFont);
         employSurvey3Ans3.setBounds(650, 490, 150, 50);
         employSurvey3Ans3.setContentAreaFilled(false);
         panelEmploy1.add(employSurvey3Ans3);
@@ -1312,7 +1312,7 @@ public class signUpPage extends JFrame {
             }
         });
         employ1NextButton.setText("Next");
-        employ1NextButton.setFont(ButtonFont);
+        employ1NextButton.setFont(mainFont);
         employ1NextButton.setBounds(700, 600, 80, 50);
         panelEmploy1.add(employ1NextButton);
 
@@ -1323,7 +1323,7 @@ public class signUpPage extends JFrame {
             public void actionPerformed(ActionEvent e) {
             }
         });
-        employ1Index1Button.setFont(ButtonFont);
+        employ1Index1Button.setFont(mainFont);
         employ1Index1Button.setBounds(170, 185, 70, 50);
         employ1Index1Button.setContentAreaFilled(false);
         panelEmploy1.add(employ1Index1Button);
@@ -1374,7 +1374,7 @@ public class signUpPage extends JFrame {
                 }
             }
         });
-        employ1Index2Button.setFont(ButtonFont);
+        employ1Index2Button.setFont(mainFont);
         employ1Index2Button.setBounds(170, 235, 70, 50);
         employ1Index2Button.setContentAreaFilled(false);
         panelEmploy1.add(employ1Index2Button);
@@ -1390,7 +1390,7 @@ public class signUpPage extends JFrame {
                 interest_selected = Long.parseLong(Integer.toString(0));
             }
         });
-        employ2RollBackButton.setFont(ButtonFont);
+        employ2RollBackButton.setFont(mainFont);
         employ2RollBackButton.setBounds(155, 105, 80, 80);
         employ2RollBackButton.setContentAreaFilled(false);
         panelEmploy2.add(employ2RollBackButton);
@@ -1407,21 +1407,21 @@ public class signUpPage extends JFrame {
         //설문조사 4의 선택지 1
         JCheckBox employSurvey4Ans1 = new JCheckBox();
         employSurvey4Ans1.setText(ansarr[0]);
-        employSurvey4Ans1.setFont(ButtonFont);
+        employSurvey4Ans1.setFont(mainFont);
         employSurvey4Ans1.setBounds(330, 190, 150, 50);
         employSurvey4Ans1.setContentAreaFilled(false);
         panelEmploy2.add(employSurvey4Ans1);
         //설문조사 4의 선택지 2
         JCheckBox employSurvey4Ans2 = new JCheckBox();
         employSurvey4Ans2.setText(ansarr[1]);
-        employSurvey4Ans2.setFont(ButtonFont);
+        employSurvey4Ans2.setFont(mainFont);
         employSurvey4Ans2.setBounds(500, 190, 150, 50);
         employSurvey4Ans2.setContentAreaFilled(false);
         panelEmploy2.add(employSurvey4Ans2);
         //설문조사 4의 선택지 3
         JCheckBox employSurvey4Ans3 = new JCheckBox();
         employSurvey4Ans3.setText(ansarr[2]);
-        employSurvey4Ans3.setFont(ButtonFont);
+        employSurvey4Ans3.setFont(mainFont);
         employSurvey4Ans3.setBounds(650, 190, 150, 50);
         employSurvey4Ans3.setContentAreaFilled(false);
         panelEmploy2.add(employSurvey4Ans3);
@@ -1438,21 +1438,21 @@ public class signUpPage extends JFrame {
         //설문조사 5의 선택지 1
         JCheckBox employSurvey5Ans1 = new JCheckBox();
         employSurvey5Ans1.setText(ansarr[0]);
-        employSurvey5Ans1.setFont(ButtonFont);
+        employSurvey5Ans1.setFont(mainFont);
         employSurvey5Ans1.setBounds(330, 340, 150, 50);
         employSurvey5Ans1.setContentAreaFilled(false);
         panelEmploy2.add(employSurvey5Ans1);
         //설문조사 5의 선택지 2
         JCheckBox employSurvey5Ans2 = new JCheckBox();
         employSurvey5Ans2.setText(ansarr[1]);
-        employSurvey5Ans2.setFont(ButtonFont);
+        employSurvey5Ans2.setFont(mainFont);
         employSurvey5Ans2.setBounds(500, 340, 150, 50);
         employSurvey5Ans2.setContentAreaFilled(false);
         panelEmploy2.add(employSurvey5Ans2);
         //설문조사 5의 선택지 3
         JCheckBox employSurvey5Ans3 = new JCheckBox();
         employSurvey5Ans3.setText(ansarr[2]);
-        employSurvey5Ans3.setFont(ButtonFont);
+        employSurvey5Ans3.setFont(mainFont);
         employSurvey5Ans3.setBounds(650, 340, 150, 50);
         employSurvey5Ans3.setContentAreaFilled(false);
         panelEmploy2.add(employSurvey5Ans3);
@@ -1469,21 +1469,21 @@ public class signUpPage extends JFrame {
         //설문조사 6의 선택지 1
         JCheckBox employSurvey6Ans1 = new JCheckBox();
         employSurvey6Ans1.setText(ansarr[0]);
-        employSurvey6Ans1.setFont(ButtonFont);
+        employSurvey6Ans1.setFont(mainFont);
         employSurvey6Ans1.setBounds(330, 490, 150, 50);
         employSurvey6Ans1.setContentAreaFilled(false);
         panelEmploy2.add(employSurvey6Ans1);
         //설문조사 6의 선택지 2
         JCheckBox employSurvey6Ans2 = new JCheckBox();
         employSurvey6Ans2.setText(ansarr[1]);
-        employSurvey6Ans2.setFont(ButtonFont);
+        employSurvey6Ans2.setFont(mainFont);
         employSurvey6Ans2.setBounds(500, 490, 150, 50);
         employSurvey6Ans2.setContentAreaFilled(false);
         panelEmploy2.add(employSurvey6Ans2);
         //설문조사 6의 선택지 3
         JCheckBox employSurvey6Ans3 = new JCheckBox();
         employSurvey6Ans3.setText(ansarr[2]);
-        employSurvey6Ans3.setFont(ButtonFont);
+        employSurvey6Ans3.setFont(mainFont);
         employSurvey6Ans3.setBounds(650, 490, 150, 50);
         employSurvey6Ans3.setContentAreaFilled(false);
         panelEmploy2.add(employSurvey6Ans3);
@@ -1550,7 +1550,7 @@ public class signUpPage extends JFrame {
             }
         });
         employ2NextButton.setText("Final Submit");
-        employ2NextButton.setFont(ButtonFont);
+        employ2NextButton.setFont(mainFont);
         employ2NextButton.setBounds(620, 600, 160, 50);
         panelEmploy2.add(employ2NextButton);
 
@@ -1563,7 +1563,7 @@ public class signUpPage extends JFrame {
                 panelEmploy1.setVisible(true);
             }
         });
-        employ2Index1Button.setFont(ButtonFont);
+        employ2Index1Button.setFont(mainFont);
         employ2Index1Button.setBounds(170, 185, 70, 50);
         employ2Index1Button.setContentAreaFilled(false);
         panelEmploy2.add(employ2Index1Button);
@@ -1576,7 +1576,7 @@ public class signUpPage extends JFrame {
 
             }
         });
-        employ2Index2Button.setFont(ButtonFont);
+        employ2Index2Button.setFont(mainFont);
         employ2Index2Button.setBounds(170, 235, 70, 50);
         employ2Index2Button.setContentAreaFilled(false);
         panelEmploy2.add(employ2Index2Button);

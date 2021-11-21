@@ -1,24 +1,20 @@
 package forumPage;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import db.Post;
 
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URI;
-import java.net.http.*;
-import java.util.Map;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
-import db.*;
-
-
-@SuppressWarnings("serial")
 public class forumPage extends JFrame {
-    private Font ButtonFont = new Font("나눔고딕", Font.PLAIN, 20);
+    private final Font mainFont = new Font("나눔고딕", Font.PLAIN, 20);
     private myPanel panelForumGeneral = new myPanel();
     private myPanel panelForumExcercise = new myPanel();
     private myPanel panelForumPrograming = new myPanel();
@@ -69,11 +65,10 @@ public class forumPage extends JFrame {
 
         //***********************************************************************************************************************************************************************
         //***********************************************************************************************************************************************************************
-        //***********************************************************************************************************************************************************************        //패널 자유게시판
+        //***********************************************************************************************************************************************************************
 
-        //창 끄기 버튼
-
-        //테이블 설정
+        //테이블 설정, 테이블만 맨 위에서 정의한다.
+        //자유테이블 설정
         DefaultTableModel general_dtm = new DefaultTableModel(0, 0);
         JTable generalTable = new JTable(general_dtm);
         //칼럼 만들기
@@ -97,91 +92,7 @@ public class forumPage extends JFrame {
         generalForumScrollPane.setBounds(25, 110, 850, 650);
         panelForumGeneral.add(generalForumScrollPane);
 
-        //자유게시판 갱신 버튼
-        JButton generalForumGeneralButton = new JButton();
-        generalForumGeneralButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateTable(Long.valueOf(0), general_dtm);
-            }
-        });
-        generalForumGeneralButton.setText("자유게시판");
-        generalForumGeneralButton.setFont(ButtonFont);
-        generalForumGeneralButton.setBounds(12, 20, 150, 80);
-        generalForumGeneralButton.setContentAreaFilled(true);
-        panelForumGeneral.add(generalForumGeneralButton);
-
-        //운동게시판 전환 버튼
-        JButton generalForumExcerciseButton = new JButton();
-        generalForumExcerciseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                interest = 1;
-                panelForumGeneral.setVisible(false);
-                panelForumExcercise.setVisible(true);
-            }
-        });
-        generalForumExcerciseButton.setText("운동게시판");
-        generalForumExcerciseButton.setFont(ButtonFont);
-        generalForumExcerciseButton.setBounds(161, 20, 150, 80);
-        generalForumExcerciseButton.setContentAreaFilled(false);
-        panelForumGeneral.add(generalForumExcerciseButton);
-
-        //프로그래밍 전환 버튼
-        JButton generalForumProgramingButton = new JButton();
-        generalForumProgramingButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                interest = 2;
-                panelForumGeneral.setVisible(false);
-                panelForumPrograming.setVisible(true);
-            }
-        });
-        generalForumProgramingButton.setText("프로그래밍");
-        generalForumProgramingButton.setFont(ButtonFont);
-        generalForumProgramingButton.setBounds(310, 20, 150, 80);
-        generalForumProgramingButton.setContentAreaFilled(false);
-        panelForumGeneral.add(generalForumProgramingButton);
-
-        //취업 전환 버튼
-        JButton generalForumEmployButton = new JButton();
-        generalForumEmployButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                interest = 3;
-                panelForumGeneral.setVisible(false);
-                panelForumEmploy.setVisible(true);
-            }
-        });
-        generalForumEmployButton.setText("취업게시판");
-        generalForumEmployButton.setFont(ButtonFont);
-        generalForumEmployButton.setBounds(459, 20, 150, 80);
-        generalForumEmployButton.setContentAreaFilled(false);
-        panelForumGeneral.add(generalForumEmployButton);
-
-        //글쓰기 버튼
-        JButton addPostButton_generalPage = new JButton();
-        addPostButton_generalPage.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelForumGeneral.setVisible(false);
-                panelAddPost.setVisible(true);
-            }
-        });
-        addPostButton_generalPage.setText("글쓰기");
-        addPostButton_generalPage.setFont(ButtonFont);
-        addPostButton_generalPage.setBounds(964, 100, 120, 80);
-        addPostButton_generalPage.setContentAreaFilled(true);
-        panelForumGeneral.add(addPostButton_generalPage);
-
-        //***********************************************************************************************************************************************************************
-        //***********************************************************************************************************************************************************************
-        //***********************************************************************************************************************************************************************
-
-        //패널 운동게시판
-        //창 끄기 버튼
-
-        //테이블 설정
+        //운동테이블 설정
         DefaultTableModel excercise_dtm = new DefaultTableModel(0, 0);
         JTable excerciseTable = new JTable(excercise_dtm);
         //칼럼 만들기
@@ -205,91 +116,7 @@ public class forumPage extends JFrame {
         excerciseForumScrollPane.setBounds(25, 110, 850, 650);
         panelForumExcercise.add(excerciseForumScrollPane);
 
-        //자유게시판 전환 버튼
-        JButton excerciseForumGeneralButton = new JButton();
-        excerciseForumGeneralButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                interest = 0;
-                panelForumExcercise.setVisible(false);
-                panelForumGeneral.setVisible(true);
-            }
-        });
-        excerciseForumGeneralButton.setText("자유게시판");
-        excerciseForumGeneralButton.setFont(ButtonFont);
-        excerciseForumGeneralButton.setBounds(12, 20, 150, 80);
-        excerciseForumGeneralButton.setContentAreaFilled(false);
-        panelForumExcercise.add(excerciseForumGeneralButton);
-
-        //운동게시판 갱신 버튼
-        JButton excerciseForumExcerciseButton = new JButton();
-        excerciseForumExcerciseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateTable(Long.valueOf(1), excercise_dtm);
-           }
-        });
-        excerciseForumExcerciseButton.setText("운동게시판");
-        excerciseForumExcerciseButton.setFont(ButtonFont);
-        excerciseForumExcerciseButton.setBounds(161, 20, 150, 80);
-        excerciseForumExcerciseButton.setContentAreaFilled(true);
-        panelForumExcercise.add(excerciseForumExcerciseButton);
-
-        //프로그래밍 전환 버튼
-        JButton excerciseForumProgramingButton = new JButton();
-        excerciseForumProgramingButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                interest = 2;
-                panelForumExcercise.setVisible(false);
-                panelForumPrograming.setVisible(true);
-            }
-        });
-        excerciseForumProgramingButton.setText("프로그래밍");
-        excerciseForumProgramingButton.setFont(ButtonFont);
-        excerciseForumProgramingButton.setBounds(310, 20, 150, 80);
-        excerciseForumProgramingButton.setContentAreaFilled(false);
-        panelForumExcercise.add(excerciseForumProgramingButton);
-
-        //취업 전환 버튼
-        JButton excerciseForumEmployButton = new JButton();
-        excerciseForumEmployButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                interest = 3;
-                panelForumExcercise.setVisible(false);
-                panelForumEmploy.setVisible(true);
-            }
-        });
-        excerciseForumEmployButton.setText("취업게시판");
-        excerciseForumEmployButton.setFont(ButtonFont);
-        excerciseForumEmployButton.setBounds(459, 20, 150, 80);
-        excerciseForumEmployButton.setContentAreaFilled(false);
-        panelForumExcercise.add(excerciseForumEmployButton);
-
-        //글쓰기 버튼
-        JButton addPostButton_excercisePage = new JButton();
-        addPostButton_excercisePage.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelForumExcercise.setVisible(false);
-                panelAddPost.setVisible(true);
-            }
-        });
-        addPostButton_excercisePage.setText("글쓰기");
-        addPostButton_excercisePage.setFont(ButtonFont);
-        addPostButton_excercisePage.setBounds(964, 100, 120, 80);
-        addPostButton_excercisePage.setContentAreaFilled(true);
-        panelForumExcercise.add(addPostButton_excercisePage);
-
-        //***********************************************************************************************************************************************************************
-        //***********************************************************************************************************************************************************************
-        //***********************************************************************************************************************************************************************
-
-        //패널 프로그래밍
-        //창 끄기 버튼
-
-        //테이블 설정
+        //프로그래밍테이블 설정
         DefaultTableModel programing_dtm = new DefaultTableModel(0, 0);
         JTable programingTable = new JTable(programing_dtm);
         //칼럼 만들기
@@ -313,91 +140,8 @@ public class forumPage extends JFrame {
         programingForumScrollPane.setBounds(25, 110, 850, 650);
         panelForumPrograming.add(programingForumScrollPane);
 
-        //자유게시판 전환 버튼
-        JButton programingForumGeneralButton = new JButton();
-        programingForumGeneralButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                interest = 0;
-                panelForumPrograming.setVisible(false);
-                panelForumGeneral.setVisible(true);
-            }
-        });
-        programingForumGeneralButton.setText("자유게시판");
-        programingForumGeneralButton.setFont(ButtonFont);
-        programingForumGeneralButton.setBounds(12, 20, 150, 80);
-        programingForumGeneralButton.setContentAreaFilled(false);
-        panelForumPrograming.add(programingForumGeneralButton);
 
-        //운동게시판 전환 버튼
-        JButton programingForumExcerciseButton = new JButton();
-        programingForumExcerciseButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                interest = 1;
-                panelForumPrograming.setVisible(false);
-                panelForumExcercise.setVisible(true);
-            }
-        });
-        programingForumExcerciseButton.setText("운동게시판");
-        programingForumExcerciseButton.setFont(ButtonFont);
-        programingForumExcerciseButton.setBounds(161, 20, 150, 80);
-        programingForumExcerciseButton.setContentAreaFilled(false);
-        panelForumPrograming.add(programingForumExcerciseButton);
-
-        //프로그래밍 업데이트 버튼
-        JButton programingForumProgramingButton = new JButton();
-        programingForumProgramingButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateTable(Long.valueOf(2), programing_dtm);
-            }
-        });
-        programingForumProgramingButton.setText("프로그래밍");
-        programingForumProgramingButton.setFont(ButtonFont);
-        programingForumProgramingButton.setBounds(310, 20, 150, 80);
-        programingForumProgramingButton.setContentAreaFilled(true);
-        panelForumPrograming.add(programingForumProgramingButton);
-
-        //취업 전환 버튼
-        JButton programingForumEmployButton = new JButton();
-        programingForumEmployButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                interest = 3;
-                panelForumPrograming.setVisible(false);
-                panelForumEmploy.setVisible(true);
-            }
-        });
-        programingForumEmployButton.setText("취업게시판");
-        programingForumEmployButton.setFont(ButtonFont);
-        programingForumEmployButton.setBounds(459, 20, 150, 80);
-        programingForumEmployButton.setContentAreaFilled(false);
-        panelForumPrograming.add(programingForumEmployButton);
-
-        //글쓰기 버튼
-        JButton addPostButton_programingPage = new JButton();
-        addPostButton_programingPage.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                panelForumPrograming.setVisible(false);
-                panelAddPost.setVisible(true);
-            }
-        });
-        addPostButton_programingPage.setText("글쓰기");
-        addPostButton_programingPage.setFont(ButtonFont);
-        addPostButton_programingPage.setBounds(964, 100, 120, 80);
-        addPostButton_programingPage.setContentAreaFilled(true);
-        panelForumPrograming.add(addPostButton_programingPage);
-
-        //***********************************************************************************************************************************************************************
-        //***********************************************************************************************************************************************************************
-        //***********************************************************************************************************************************************************************
-
-        //패널 취업게시판
-        //창 끄기 버튼
-
-        //테이블 설정
+        //취업테이블 설정
         DefaultTableModel employ_dtm = new DefaultTableModel(0, 0);
         JTable employTable = new JTable(employ_dtm);
         //칼럼 만들기
@@ -421,6 +165,276 @@ public class forumPage extends JFrame {
         employForumScrollPane.setBounds(25, 110, 850, 650);
         panelForumEmploy.add(employForumScrollPane);
 
+        //***********************************************************************************************************************************************************************
+        //***********************************************************************************************************************************************************************
+        //***********************************************************************************************************************************************************************        //패널 자유게시판
+
+        //창 끄기 버튼
+
+        //포럼페이지를 키자마자 자유게시판 테이블이 생성되고 동시에 게시판을 업데이트한다.
+        updateTable(Long.valueOf(0), general_dtm);
+
+        //자유게시판 갱신 버튼
+        JButton generalForumGeneralButton = new JButton();
+        generalForumGeneralButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTable(Long.valueOf(0), general_dtm);
+            }
+        });
+        generalForumGeneralButton.setText("자유게시판");
+        generalForumGeneralButton.setFont(mainFont);
+        generalForumGeneralButton.setBounds(12, 20, 150, 80);
+        generalForumGeneralButton.setContentAreaFilled(true);
+        panelForumGeneral.add(generalForumGeneralButton);
+
+        //운동게시판 전환 버튼
+        JButton generalForumExcerciseButton = new JButton();
+        generalForumExcerciseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                interest = 1;
+                panelForumGeneral.setVisible(false);
+                panelForumExcercise.setVisible(true);
+                updateTable(Long.valueOf(1), excercise_dtm);
+            }
+        });
+        generalForumExcerciseButton.setText("운동게시판");
+        generalForumExcerciseButton.setFont(mainFont);
+        generalForumExcerciseButton.setBounds(161, 20, 150, 80);
+        generalForumExcerciseButton.setContentAreaFilled(false);
+        panelForumGeneral.add(generalForumExcerciseButton);
+
+        //프로그래밍 전환 버튼
+        JButton generalForumProgramingButton = new JButton();
+        generalForumProgramingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                interest = 2;
+                panelForumGeneral.setVisible(false);
+                panelForumPrograming.setVisible(true);
+                updateTable(Long.valueOf(2), programing_dtm);
+            }
+        });
+        generalForumProgramingButton.setText("프로그래밍");
+        generalForumProgramingButton.setFont(mainFont);
+        generalForumProgramingButton.setBounds(310, 20, 150, 80);
+        generalForumProgramingButton.setContentAreaFilled(false);
+        panelForumGeneral.add(generalForumProgramingButton);
+
+        //취업 전환 버튼
+        JButton generalForumEmployButton = new JButton();
+        generalForumEmployButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                interest = 3;
+                panelForumGeneral.setVisible(false);
+                panelForumEmploy.setVisible(true);
+                updateTable(Long.valueOf(3), employ_dtm);
+            }
+        });
+        generalForumEmployButton.setText("취업게시판");
+        generalForumEmployButton.setFont(mainFont);
+        generalForumEmployButton.setBounds(459, 20, 150, 80);
+        generalForumEmployButton.setContentAreaFilled(false);
+        panelForumGeneral.add(generalForumEmployButton);
+
+        //글쓰기 버튼
+        JButton addPostButton_generalPage = new JButton();
+        addPostButton_generalPage.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelForumGeneral.setVisible(false);
+                panelAddPost.setVisible(true);
+            }
+        });
+        addPostButton_generalPage.setText("글쓰기");
+        addPostButton_generalPage.setFont(mainFont);
+        addPostButton_generalPage.setBounds(964, 100, 120, 80);
+        addPostButton_generalPage.setContentAreaFilled(true);
+        panelForumGeneral.add(addPostButton_generalPage);
+
+        //***********************************************************************************************************************************************************************
+        //***********************************************************************************************************************************************************************
+        //***********************************************************************************************************************************************************************
+
+        //패널 운동게시판
+        //창 끄기 버튼
+
+        //자유게시판 전환 버튼
+        JButton excerciseForumGeneralButton = new JButton();
+        excerciseForumGeneralButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                interest = 0;
+                panelForumExcercise.setVisible(false);
+                panelForumGeneral.setVisible(true);
+                updateTable(Long.valueOf(0), general_dtm);
+            }
+        });
+        excerciseForumGeneralButton.setText("자유게시판");
+        excerciseForumGeneralButton.setFont(mainFont);
+        excerciseForumGeneralButton.setBounds(12, 20, 150, 80);
+        excerciseForumGeneralButton.setContentAreaFilled(false);
+        panelForumExcercise.add(excerciseForumGeneralButton);
+
+        //운동게시판 갱신 버튼
+        JButton excerciseForumExcerciseButton = new JButton();
+        excerciseForumExcerciseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTable(Long.valueOf(1), excercise_dtm);
+           }
+        });
+        excerciseForumExcerciseButton.setText("운동게시판");
+        excerciseForumExcerciseButton.setFont(mainFont);
+        excerciseForumExcerciseButton.setBounds(161, 20, 150, 80);
+        excerciseForumExcerciseButton.setContentAreaFilled(true);
+        panelForumExcercise.add(excerciseForumExcerciseButton);
+
+        //프로그래밍 전환 버튼
+        JButton excerciseForumProgramingButton = new JButton();
+        excerciseForumProgramingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                interest = 2;
+                panelForumExcercise.setVisible(false);
+                panelForumPrograming.setVisible(true);
+                updateTable(Long.valueOf(2), programing_dtm);
+            }
+        });
+        excerciseForumProgramingButton.setText("프로그래밍");
+        excerciseForumProgramingButton.setFont(mainFont);
+        excerciseForumProgramingButton.setBounds(310, 20, 150, 80);
+        excerciseForumProgramingButton.setContentAreaFilled(false);
+        panelForumExcercise.add(excerciseForumProgramingButton);
+
+        //취업 전환 버튼
+        JButton excerciseForumEmployButton = new JButton();
+        excerciseForumEmployButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                interest = 3;
+                panelForumExcercise.setVisible(false);
+                panelForumEmploy.setVisible(true);
+                updateTable(Long.valueOf(3), employ_dtm);
+            }
+        });
+        excerciseForumEmployButton.setText("취업게시판");
+        excerciseForumEmployButton.setFont(mainFont);
+        excerciseForumEmployButton.setBounds(459, 20, 150, 80);
+        excerciseForumEmployButton.setContentAreaFilled(false);
+        panelForumExcercise.add(excerciseForumEmployButton);
+
+        //글쓰기 버튼
+        JButton addPostButton_excercisePage = new JButton();
+        addPostButton_excercisePage.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelForumExcercise.setVisible(false);
+                panelAddPost.setVisible(true);
+            }
+        });
+        addPostButton_excercisePage.setText("글쓰기");
+        addPostButton_excercisePage.setFont(mainFont);
+        addPostButton_excercisePage.setBounds(964, 100, 120, 80);
+        addPostButton_excercisePage.setContentAreaFilled(true);
+        panelForumExcercise.add(addPostButton_excercisePage);
+
+        //***********************************************************************************************************************************************************************
+        //***********************************************************************************************************************************************************************
+        //***********************************************************************************************************************************************************************
+
+        //패널 프로그래밍
+        //창 끄기 버튼
+
+        //자유게시판 전환 버튼
+        JButton programingForumGeneralButton = new JButton();
+        programingForumGeneralButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                interest = 0;
+                panelForumPrograming.setVisible(false);
+                panelForumGeneral.setVisible(true);
+                updateTable(Long.valueOf(0), general_dtm);
+            }
+        });
+        programingForumGeneralButton.setText("자유게시판");
+        programingForumGeneralButton.setFont(mainFont);
+        programingForumGeneralButton.setBounds(12, 20, 150, 80);
+        programingForumGeneralButton.setContentAreaFilled(false);
+        panelForumPrograming.add(programingForumGeneralButton);
+
+        //운동게시판 전환 버튼
+        JButton programingForumExcerciseButton = new JButton();
+        programingForumExcerciseButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                interest = 1;
+                panelForumPrograming.setVisible(false);
+                panelForumExcercise.setVisible(true);
+                updateTable(Long.valueOf(1), excercise_dtm);
+            }
+        });
+        programingForumExcerciseButton.setText("운동게시판");
+        programingForumExcerciseButton.setFont(mainFont);
+        programingForumExcerciseButton.setBounds(161, 20, 150, 80);
+        programingForumExcerciseButton.setContentAreaFilled(false);
+        panelForumPrograming.add(programingForumExcerciseButton);
+
+        //프로그래밍 업데이트 버튼
+        JButton programingForumProgramingButton = new JButton();
+        programingForumProgramingButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTable(Long.valueOf(2), programing_dtm);
+            }
+        });
+        programingForumProgramingButton.setText("프로그래밍");
+        programingForumProgramingButton.setFont(mainFont);
+        programingForumProgramingButton.setBounds(310, 20, 150, 80);
+        programingForumProgramingButton.setContentAreaFilled(true);
+        panelForumPrograming.add(programingForumProgramingButton);
+
+        //취업 전환 버튼
+        JButton programingForumEmployButton = new JButton();
+        programingForumEmployButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                interest = 3;
+                panelForumPrograming.setVisible(false);
+                panelForumEmploy.setVisible(true);
+                updateTable(Long.valueOf(3), employ_dtm);
+            }
+        });
+        programingForumEmployButton.setText("취업게시판");
+        programingForumEmployButton.setFont(mainFont);
+        programingForumEmployButton.setBounds(459, 20, 150, 80);
+        programingForumEmployButton.setContentAreaFilled(false);
+        panelForumPrograming.add(programingForumEmployButton);
+
+        //글쓰기 버튼
+        JButton addPostButton_programingPage = new JButton();
+        addPostButton_programingPage.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelForumPrograming.setVisible(false);
+                panelAddPost.setVisible(true);
+            }
+        });
+        addPostButton_programingPage.setText("글쓰기");
+        addPostButton_programingPage.setFont(mainFont);
+        addPostButton_programingPage.setBounds(964, 100, 120, 80);
+        addPostButton_programingPage.setContentAreaFilled(true);
+        panelForumPrograming.add(addPostButton_programingPage);
+
+        //***********************************************************************************************************************************************************************
+        //***********************************************************************************************************************************************************************
+        //***********************************************************************************************************************************************************************
+
+        //패널 취업게시판
+        //창 끄기 버튼
+
         //자유게시판 전환 버튼
         JButton employForumGeneralButton = new JButton();
         employForumGeneralButton.addActionListener(new ActionListener() {
@@ -429,10 +443,11 @@ public class forumPage extends JFrame {
                 interest = 0;
                 panelForumEmploy.setVisible(false);
                 panelForumGeneral.setVisible(true);
+                updateTable(Long.valueOf(0), general_dtm);
             }
         });
         employForumGeneralButton.setText("자유게시판");
-        employForumGeneralButton.setFont(ButtonFont);
+        employForumGeneralButton.setFont(mainFont);
         employForumGeneralButton.setBounds(12, 20, 150, 80);
         employForumGeneralButton.setContentAreaFilled(false);
         panelForumEmploy.add(employForumGeneralButton);
@@ -445,10 +460,11 @@ public class forumPage extends JFrame {
                 interest = 1;
                 panelForumEmploy.setVisible(false);
                 panelForumExcercise.setVisible(true);
+                updateTable(Long.valueOf(1), excercise_dtm);
             }
         });
         employForumExcerciseButton.setText("운동게시판");
-        employForumExcerciseButton.setFont(ButtonFont);
+        employForumExcerciseButton.setFont(mainFont);
         employForumExcerciseButton.setBounds(161, 20, 150, 80);
         employForumExcerciseButton.setContentAreaFilled(false);
         panelForumEmploy.add(employForumExcerciseButton);
@@ -461,10 +477,11 @@ public class forumPage extends JFrame {
                 interest = 2;
                 panelForumEmploy.setVisible(false);
                 panelForumPrograming.setVisible(true);
+                updateTable(Long.valueOf(2), programing_dtm);
             }
         });
         employForumProgramingButton.setText("프로그래밍");
-        employForumProgramingButton.setFont(ButtonFont);
+        employForumProgramingButton.setFont(mainFont);
         employForumProgramingButton.setBounds(310, 20, 150, 80);
         employForumProgramingButton.setContentAreaFilled(false);
         panelForumEmploy.add(employForumProgramingButton);
@@ -478,7 +495,7 @@ public class forumPage extends JFrame {
             }
         });
         employForumEmployButton.setText("취업게시판");
-        employForumEmployButton.setFont(ButtonFont);
+        employForumEmployButton.setFont(mainFont);
         employForumEmployButton.setBounds(459, 20, 150, 80);
         employForumEmployButton.setContentAreaFilled(true);
         panelForumEmploy.add(employForumEmployButton);
@@ -493,7 +510,7 @@ public class forumPage extends JFrame {
             }
         });
         addPostButton_employPage.setText("글쓰기");
-        addPostButton_employPage.setFont(ButtonFont);
+        addPostButton_employPage.setFont(mainFont);
         addPostButton_employPage.setBounds(964, 100, 120, 80);
         addPostButton_employPage.setContentAreaFilled(true);
         panelForumEmploy.add(addPostButton_employPage);
@@ -505,29 +522,29 @@ public class forumPage extends JFrame {
         //제목 입력받기
         JLabel addPostTitlLabel = new JLabel();
         addPostTitlLabel.setText("제목");
-        addPostTitlLabel.setFont(ButtonFont);
+        addPostTitlLabel.setFont(mainFont);
         addPostTitlLabel.setBounds(50, 135, 100, 50);
         panelAddPost.add(addPostTitlLabel);
         JTextField addPostTitlTextField = new JTextField();
-        addPostTitlTextField.setFont(ButtonFont);
+        addPostTitlTextField.setFont(mainFont);
         addPostTitlTextField.setBounds(110, 140, 500, 40);
         panelAddPost.add(addPostTitlTextField);
 
         //카테고리 선택
         JComboBox<String> addPostCategoryBox = new JComboBox();
         addPostCategoryBox.setModel(new DefaultComboBoxModel(new String[] {"자유게시판", "운동게시판", "프로그래밍", "취업게시판"}));
-        addPostCategoryBox.setFont(ButtonFont);
+        addPostCategoryBox.setFont(mainFont);
         addPostCategoryBox.setBounds(630, 140, 130, 40);
         panelAddPost.add(addPostCategoryBox);
 
         //내용 입력받기
         JLabel addPostContentLabel = new JLabel();
         addPostContentLabel.setText("내용");
-        addPostContentLabel.setFont(ButtonFont);
+        addPostContentLabel.setFont(mainFont);
         addPostContentLabel.setBounds(50, 200, 100, 50);
         panelAddPost.add(addPostContentLabel);
         JTextArea addPostContentTextArea = new JTextArea(10, 10);
-        addPostContentTextArea.setFont(ButtonFont);
+        addPostContentTextArea.setFont(mainFont);
         addPostContentTextArea.setLineWrap(true);
         JScrollPane scrollAddPostContent = new JScrollPane(addPostContentTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollAddPostContent.setBounds(110, 220, 800, 550);
@@ -544,25 +561,25 @@ public class forumPage extends JFrame {
                 }else{
                     int interest = addPostCategoryBox.getSelectedIndex();
                     switch (interest){
-                        case 0: addTable(Long.valueOf(addPostCategoryBox.getSelectedIndex()), general_dtm, addPostTitlTextField.getText(), addPostContentTextArea.getText());
+                        case 0: addTable(Long.valueOf(0), general_dtm, addPostTitlTextField.getText(), addPostContentTextArea.getText());
                             panelAddPost.setVisible(false);
                             panelForumGeneral.setVisible(true);
                             addPostTitlTextField.setText("");
                             addPostContentTextArea.setText("");
                             break;
-                        case 1:addTable(Long.valueOf(addPostCategoryBox.getSelectedIndex()), excercise_dtm, addPostTitlTextField.getText(), addPostContentTextArea.getText());
+                        case 1:addTable(Long.valueOf(1), excercise_dtm, addPostTitlTextField.getText(), addPostContentTextArea.getText());
                             panelAddPost.setVisible(false);
                             panelForumExcercise.setVisible(true);
                             addPostTitlTextField.setText("");
                             addPostContentTextArea.setText("");
                             break;
-                        case 2:addTable(Long.valueOf(addPostCategoryBox.getSelectedIndex()), programing_dtm, addPostTitlTextField.getText(), addPostContentTextArea.getText());
+                        case 2:addTable(Long.valueOf(2), programing_dtm, addPostTitlTextField.getText(), addPostContentTextArea.getText());
                             panelAddPost.setVisible(false);
                             panelForumPrograming.setVisible(true);
                             addPostTitlTextField.setText("");
                             addPostContentTextArea.setText("");
                             break;
-                        case 3:addTable(Long.valueOf(addPostCategoryBox.getSelectedIndex()), employ_dtm, addPostTitlTextField.getText(), addPostContentTextArea.getText());
+                        case 3:addTable(Long.valueOf(3), employ_dtm, addPostTitlTextField.getText(), addPostContentTextArea.getText());
                             panelAddPost.setVisible(false);
                             panelForumEmploy.setVisible(true);
                             addPostTitlTextField.setText("");
@@ -574,7 +591,7 @@ public class forumPage extends JFrame {
             }
         });
         addPostSubmitButton.setText("제출");
-        addPostSubmitButton.setFont(ButtonFont);
+        addPostSubmitButton.setFont(mainFont);
         addPostSubmitButton.setBounds(940, 690, 120, 80);
         addPostSubmitButton.setContentAreaFilled(true);
         panelAddPost.add(addPostSubmitButton);
@@ -587,7 +604,42 @@ public class forumPage extends JFrame {
 
     //게시판 업데이트 함수
     void updateTable(Long interest, DefaultTableModel dtm){
+        dtm.setRowCount(0);
+        try{
+            //아래의 uri로 client를 통해 요청을 보낸다.
+            String uri = "http://localhost:8080/api/post?interest_id=" + String.valueOf(interest);
+            HttpClient client = HttpClient.newHttpClient();
 
+            //request
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(uri))  // 위에서 만든 URI
+                    .GET()  // HTTP 메소드, body 지정(GET의 경우 생략 가능)
+                    .build();
+            System.out.println("update request : " + request);
+
+            // 위에서 생성한 request를 보내고, 받은 response를 저장
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("update response : " + response);
+            System.out.println("1");
+            System.out.println("update body : " + response.body());
+            System.out.println("2");
+
+            // responseBody to Post Class Array
+            ObjectMapper mapper = new ObjectMapper();
+            Post[] posts = mapper.readValue(response.body(), Post[].class);
+            System.out.println("3");
+
+            // Jtable에 일정 추가
+            for(Post p : posts) {
+                dtm.addRow(new Object[] {p.getId(), p.getInterest(), p.getTitle(), p.getContent()});
+                System.out.println("4");
+                System.out.println(p);
+                System.out.println("5");
+            }
+
+        }catch(Exception e){
+             System.out.println("업데이트 오류");
+        }
     }
 
     //***********************************************************************************************************************************************************************
@@ -595,38 +647,47 @@ public class forumPage extends JFrame {
     //***********************************************************************************************************************************************************************
 
     //게시판 글 추가 함수
-    void addTable(Long interest, DefaultTableModel dtm, String title, String content){
+    void addTable(Long interest, DefaultTableModel dtm, String title, String content) {
+        //request보내기
+        //user_id DB에서 받아오기
+        int user_id = 1;
+        //request 보낼 url
+        String uri = "http://localhost:8080/api/user/" + user_id + "/post";
+        //request body
+        Post post = new Post(interest, title, content);
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
-            //request보내기
-            //user_id DB에서 받아오기
-            int user_id = 1;
-            //request 보낼 url
-            String uri = "http://localhost:8080/api/user" + user_id + "/post";
-            //request body
-            Post post = new Post(interest, title, content);
-            ObjectMapper objectMapper = new ObjectMapper();
-            try {
-                String requestBody = objectMapper.writeValueAsString(post);
-                System.out.println(requestBody);
-                //request header
-                HttpClient client = HttpClient.newHttpClient();
-                HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create(uri))
-                        .header("Content-Type", "application/json; charset=UTF-8")  // content type, 인코딩형식 지정.
-                        .PUT(HttpRequest.BodyPublishers.ofString(requestBody))  // HTTP 메소드, body 지정(위에서 만든 JSON 전달)
-                        .build();
-                //DB에 정보만 보내고 새로고침 함수를 호출한다.
-                updateTable(interest, dtm);
-            } catch (JsonProcessingException ex) {
-                System.out.println("서버 요청 오류");
-                ex.printStackTrace();
-            }
-        }catch(Exception e){
-            System.out.println("서버 응답 오류");
+            HttpClient client = HttpClient.newHttpClient();
+            //request
+            String requestBody = objectMapper.writeValueAsString(post);
+            System.out.println("add requestBody : " + requestBody);
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(uri))
+                    .header("Content-Type", "application/json; charset=UTF-8")  // content type, 인코딩형식 지정.
+                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))  // HTTP 메소드, body 지정(위에서 만든 JSON 전달)
+                    .build();
+
+            //response
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("add response : " + response);
+            System.out.println("1");
+            System.out.println("add response body : " + response.body());
+            System.out.println("2");
+
+            //responsebody to Post Class
+            //TypeFactory typeFactory = objectMapper.getTypeFactory();
+            //List<Post> postClass = objectMapper.readValue(response.body(), typeFactory.constructCollectionType(List.class, Post.class));
+            Post apost = objectMapper.readValue(response.body(), Post.class);
+            System.out.println("add response to class : ");
+            System.out.println("3");
+
+            //update
+            updateTable(interest, dtm);
+            //dtm.addRow(new Object[] {"0", String.valueOf(interest), title, content});
+        } catch (Exception ex) {
+            System.out.println("글 추가 오류");
+            ex.printStackTrace();
         }
-
-
-
     }
 
     //***********************************************************************************************************************************************************************

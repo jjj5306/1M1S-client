@@ -7,9 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-@SuppressWarnings("serial")
 public class mainPage extends JFrame {
-    private Font ButtonFont = new Font("나눔고딕", Font.PLAIN, 20);;
+    private final Font mainFont = new Font("나눔고딕", Font.PLAIN, 20);;
     public myPanel mainpanel = new myPanel();
 
     public mainPage() {
@@ -40,7 +39,7 @@ public class mainPage extends JFrame {
                 JOptionPane.showMessageDialog(null, "마이페이지로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        button1.setFont(ButtonFont);
+        button1.setFont(mainFont);
         button1.setBounds(0, 0, 200, 110);
         mainpanel.add(button1);
 
@@ -53,7 +52,7 @@ public class mainPage extends JFrame {
                 JOptionPane.showMessageDialog(null, "시간관리로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        button2.setFont(ButtonFont);
+        button2.setFont(mainFont);
         button2.setBounds(0, 110, 200, 110);
         mainpanel.add(button2);
 
@@ -66,7 +65,7 @@ public class mainPage extends JFrame {
                 JOptionPane.showMessageDialog(null, "랭킹으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        button3.setFont(ButtonFont);
+        button3.setFont(mainFont);
         button3.setBounds(0, 220, 200, 110);
         mainpanel.add(button3);
 
@@ -79,7 +78,7 @@ public class mainPage extends JFrame {
                 JOptionPane.showMessageDialog(null, "그룹으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        button4.setFont(ButtonFont);
+        button4.setFont(mainFont);
         button4.setBounds(0, 330, 200, 110);
         mainpanel.add(button4);
 
@@ -92,7 +91,7 @@ public class mainPage extends JFrame {
                 forumPage forum = new forumPage();
             }
         });
-        button5.setFont(ButtonFont);
+        button5.setFont(mainFont);
         button5.setBounds(0, 440, 200, 110);
         mainpanel.add(button5);
 
@@ -105,7 +104,7 @@ public class mainPage extends JFrame {
                 JOptionPane.showMessageDialog(null, "커리큘럼으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-        button6.setFont(ButtonFont);
+        button6.setFont(mainFont);
         button6.setBounds(0, 550, 200, 250);
         mainpanel.add(button6);
     }

@@ -10,9 +10,8 @@ import java.awt.event.*;
 import java.util.HashMap;
 import mainPage.mainPage;
 
-@SuppressWarnings("serial")
 public class loginPage extends JFrame{
-    private Font ButtonFont = new Font("나눔고딕", Font.PLAIN, 20);;
+    private final Font mainFont = new Font("나눔고딕", Font.PLAIN, 20);;
     private myPanel loginpanel = new myPanel();
 
     public loginPage(mainPage p){
@@ -37,22 +36,22 @@ public class loginPage extends JFrame{
         //아이디 입력
         Label idLabel = new Label();
         idLabel.setText("USER ID");
-        idLabel.setFont(ButtonFont);
+        idLabel.setFont(mainFont);
         idLabel.setBounds(390, 230, 88, 30);
         loginpanel.add(idLabel);
         TextField idText = new TextField();
-        idText.setFont(ButtonFont);
+        idText.setFont(mainFont);
         idText.setBounds(390, 265, 370, 30);
         loginpanel.add(idText);
 
         //비밀번호 입력
         Label pwdLabel = new Label();
         pwdLabel.setText("PASSWORD");
-        pwdLabel.setFont(ButtonFont);
+        pwdLabel.setFont(mainFont);
         pwdLabel.setBounds(390, 310, 125, 30);
         loginpanel.add(pwdLabel);
         TextField pwdText = new TextField();
-        pwdText.setFont(ButtonFont);
+        pwdText.setFont(mainFont);
         pwdText.setBounds(390, 345, 370, 30);
         pwdText.setEchoChar('*');
         loginpanel.add(pwdText);
@@ -94,7 +93,7 @@ public class loginPage extends JFrame{
                 }
             }
         });
-        loginButton.setFont(ButtonFont);
+        loginButton.setFont(mainFont);
         loginButton.setBounds(390, 385, 180, 80);
         loginpanel.add(loginButton);
 
@@ -107,7 +106,7 @@ public class loginPage extends JFrame{
                 signUp.setVisible(true);
             }
         });
-        signUpButton.setFont(ButtonFont);
+        signUpButton.setFont(mainFont);
         signUpButton.setBounds(580, 385, 180, 80);
         loginpanel.add(signUpButton);
     }
