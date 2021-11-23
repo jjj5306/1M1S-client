@@ -1,13 +1,15 @@
 package forumPage;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import db.Post;
+import db.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -15,13 +17,44 @@ import java.net.http.HttpResponse;
 
 public class forumPage extends JFrame {
     private final Font mainFont = new Font("나눔고딕", Font.PLAIN, 20);
+    private final Font smallFont = new Font("나눔고딕", Font.PLAIN, 17);
     private myPanel panelForumGeneral = new myPanel();
     private myPanel panelForumExcercise = new myPanel();
     private myPanel panelForumPrograming = new myPanel();
     private myPanel panelForumEmploy = new myPanel();
     private myPanel2 panelAddPost = new myPanel2();
+    private myPanel2 panelClickPost = new myPanel2();
     private int interest = 0; //관심분야, 1, 2, 3 순서대로 운동, 프로그래밍, 취업 0인 경우 자유 게시판 글
     private String[] header = {"id", "interest", "title", "content"}; //table header
+    private int post_id = 0;
+    private DefaultTableModel general_dtm = new DefaultTableModel(0, 0){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    private JTable generalTable = new JTable(general_dtm);
+    private DefaultTableModel excercise_dtm = new DefaultTableModel(0, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    private JTable excerciseTable = new JTable(excercise_dtm);
+    private DefaultTableModel programing_dtm = new DefaultTableModel(0, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    private JTable programingTable = new JTable(programing_dtm);
+    private DefaultTableModel employ_dtm = new DefaultTableModel(0, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    private JTable employTable = new JTable(employ_dtm);
 
     public forumPage() {
         //프레임 설정
@@ -36,6 +69,7 @@ public class forumPage extends JFrame {
         add(panelForumPrograming);
         add(panelForumEmploy);
         add(panelAddPost);
+        add(panelClickPost);
 
         //***********************************************************************************************************************************************************************
         //***********************************************************************************************************************************************************************
@@ -62,6 +96,10 @@ public class forumPage extends JFrame {
         panelAddPost.setSize(1100, 824);
         panelAddPost.setLayout(null);
         panelAddPost.setVisible(false);
+        //게시글 클릭 패널
+        panelClickPost.setSize(1100, 824);
+        panelClickPost.setLayout(null);
+        panelClickPost.setVisible(false);
 
         //***********************************************************************************************************************************************************************
         //***********************************************************************************************************************************************************************
@@ -69,8 +107,6 @@ public class forumPage extends JFrame {
 
         //테이블 설정, 테이블만 맨 위에서 정의한다.
         //자유테이블 설정
-        DefaultTableModel general_dtm = new DefaultTableModel(0, 0);
-        JTable generalTable = new JTable(general_dtm);
         //칼럼 만들기
         general_dtm.setColumnIdentifiers(header);
         //id, interest안보이게 설정
@@ -86,6 +122,8 @@ public class forumPage extends JFrame {
         //컬럼 크기, 위치 조절 불가
         generalTable.getTableHeader().setReorderingAllowed(false);
         generalTable.getTableHeader().setReorderingAllowed(false);
+        //마우스 이벤트 추가
+        generalTable.addMouseListener(new MyMouseListener());
         //스크롤팬 설정
         JScrollPane generalForumScrollPane = new JScrollPane(generalTable, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         generalForumScrollPane.setVisible(true);
@@ -93,8 +131,6 @@ public class forumPage extends JFrame {
         panelForumGeneral.add(generalForumScrollPane);
 
         //운동테이블 설정
-        DefaultTableModel excercise_dtm = new DefaultTableModel(0, 0);
-        JTable excerciseTable = new JTable(excercise_dtm);
         //칼럼 만들기
         excercise_dtm.setColumnIdentifiers(header);
         //id, interest안보이게 설정
@@ -110,6 +146,8 @@ public class forumPage extends JFrame {
         //컬럼 크기, 위치 조절 불가
         excerciseTable.getTableHeader().setReorderingAllowed(false);
         excerciseTable.getTableHeader().setReorderingAllowed(false);
+        //마우스 이벤트 추가
+        excerciseTable.addMouseListener(new MyMouseListener());
         //스크롤팬 설정
         JScrollPane excerciseForumScrollPane = new JScrollPane(excerciseTable, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         excerciseForumScrollPane.setVisible(true);
@@ -117,8 +155,6 @@ public class forumPage extends JFrame {
         panelForumExcercise.add(excerciseForumScrollPane);
 
         //프로그래밍테이블 설정
-        DefaultTableModel programing_dtm = new DefaultTableModel(0, 0);
-        JTable programingTable = new JTable(programing_dtm);
         //칼럼 만들기
         programing_dtm.setColumnIdentifiers(header);
         //id, interest안보이게 설정
@@ -133,17 +169,16 @@ public class forumPage extends JFrame {
         programingTable.getColumn("title").setMaxWidth(250);
         //컬럼 크기, 위치 조절 불가
         programingTable.getTableHeader().setReorderingAllowed(false);
-        programingTable.getTableHeader().setReorderingAllowed(false);;
+        programingTable.getTableHeader().setReorderingAllowed(false);
+        //마우스 이벤트 추가
+        programingTable.addMouseListener(new MyMouseListener());
         //스크롤팬 설정
         JScrollPane programingForumScrollPane = new JScrollPane(programingTable, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         programingForumScrollPane.setVisible(true);
         programingForumScrollPane.setBounds(25, 110, 850, 650);
         panelForumPrograming.add(programingForumScrollPane);
 
-
         //취업테이블 설정
-        DefaultTableModel employ_dtm = new DefaultTableModel(0, 0);
-        JTable employTable = new JTable(employ_dtm);
         //칼럼 만들기
         employ_dtm.setColumnIdentifiers(header);
         //id, interest안보이게 설정
@@ -157,8 +192,10 @@ public class forumPage extends JFrame {
         employTable.getColumn("title").setMinWidth(250);
         employTable.getColumn("title").setMaxWidth(250);
         //컬럼 크기, 위치 조절 불가
-        generalTable.getTableHeader().setReorderingAllowed(false);
-        generalTable.getTableHeader().setReorderingAllowed(false);
+        employTable.getTableHeader().setReorderingAllowed(false);
+        employTable.getTableHeader().setReorderingAllowed(false);
+        //마우스 이벤트 추가
+        employTable.addMouseListener(new MyMouseListener());
         //스크롤팬 설정
         JScrollPane employForumScrollPane = new JScrollPane(employTable, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         employForumScrollPane.setVisible(true);
@@ -253,6 +290,7 @@ public class forumPage extends JFrame {
         addPostButton_generalPage.setBounds(964, 100, 120, 80);
         addPostButton_generalPage.setContentAreaFilled(true);
         panelForumGeneral.add(addPostButton_generalPage);
+
 
         //***********************************************************************************************************************************************************************
         //***********************************************************************************************************************************************************************
@@ -519,6 +557,7 @@ public class forumPage extends JFrame {
         //***********************************************************************************************************************************************************************
         //***********************************************************************************************************************************************************************
 
+        //글 추가 패널
         //제목 입력받기
         JLabel addPostTitlLabel = new JLabel();
         addPostTitlLabel.setText("제목");
@@ -595,7 +634,6 @@ public class forumPage extends JFrame {
         addPostSubmitButton.setBounds(940, 690, 120, 80);
         addPostSubmitButton.setContentAreaFilled(true);
         panelAddPost.add(addPostSubmitButton);
-
     }
 
     //***********************************************************************************************************************************************************************
@@ -606,11 +644,11 @@ public class forumPage extends JFrame {
     void updateTable(Long interest, DefaultTableModel dtm){
         dtm.setRowCount(0);
         try{
-            //아래의 uri로 client를 통해 요청을 보낸다.
-            String uri = "http://localhost:8080/api/post?interest_id=" + String.valueOf(interest);
             HttpClient client = HttpClient.newHttpClient();
+            ObjectMapper mapper = new ObjectMapper();
 
-            //request
+            //request보내기
+            String uri = "http://localhost:8080/api/post?interest_id=" + String.valueOf(interest);
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(uri))  // 위에서 만든 URI
                     .GET()  // HTTP 메소드, body 지정(GET의 경우 생략 가능)
@@ -620,25 +658,18 @@ public class forumPage extends JFrame {
             // 위에서 생성한 request를 보내고, 받은 response를 저장
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println("update response : " + response);
-            System.out.println("1");
             System.out.println("update body : " + response.body());
-            System.out.println("2");
-
             // responseBody to Post Class Array
-            ObjectMapper mapper = new ObjectMapper();
             Post[] posts = mapper.readValue(response.body(), Post[].class);
-            System.out.println("3");
 
             // Jtable에 일정 추가
             for(Post p : posts) {
                 dtm.addRow(new Object[] {p.getId(), p.getInterest(), p.getTitle(), p.getContent()});
-                System.out.println("4");
                 System.out.println(p);
-                System.out.println("5");
             }
 
         }catch(Exception e){
-             System.out.println("업데이트 오류");
+             System.out.println("게시글 업데이트 오류");
         }
     }
 
@@ -648,16 +679,16 @@ public class forumPage extends JFrame {
 
     //게시판 글 추가 함수
     void addTable(Long interest, DefaultTableModel dtm, String title, String content) {
-        //request보내기
-        //user_id DB에서 받아오기
-        int user_id = 1;
-        //request 보낼 url
-        String uri = "http://localhost:8080/api/user/" + user_id + "/post";
-        //request body
-        Post post = new Post(interest, title, content);
-        ObjectMapper objectMapper = new ObjectMapper();
         try {
             HttpClient client = HttpClient.newHttpClient();
+            ObjectMapper objectMapper = new ObjectMapper();
+            //user_id DB에서 받아오기
+            int user_id = 1;
+
+            //request 보내기
+            String uri = "http://localhost:8080/api/user/" + user_id + "/post";
+            //request body
+            Post post = new Post(interest, title, content);
             //request
             String requestBody = objectMapper.writeValueAsString(post);
             System.out.println("add requestBody : " + requestBody);
@@ -670,23 +701,155 @@ public class forumPage extends JFrame {
             //response
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println("add response : " + response);
-            System.out.println("1");
             System.out.println("add response body : " + response.body());
-            System.out.println("2");
 
             //responsebody to Post Class
-            //TypeFactory typeFactory = objectMapper.getTypeFactory();
-            //List<Post> postClass = objectMapper.readValue(response.body(), typeFactory.constructCollectionType(List.class, Post.class));
             Post apost = objectMapper.readValue(response.body(), Post.class);
-            System.out.println("add response to class : ");
-            System.out.println("3");
 
             //update
             updateTable(interest, dtm);
-            //dtm.addRow(new Object[] {"0", String.valueOf(interest), title, content});
         } catch (Exception ex) {
             System.out.println("글 추가 오류");
             ex.printStackTrace();
+        }
+    }
+
+    //***********************************************************************************************************************************************************************
+    //***********************************************************************************************************************************************************************
+    //***********************************************************************************************************************************************************************
+
+    //글 클릭 함수
+    void getPost(Long interset, JTable table){
+        //글을 클릭하면 panelClickPost패널의 컴포넌트 모두 지우고 요청이 들어온 게시글의 정보를 받아서 panelClickPost패널에 추가한다.
+        panelClickPost.removeAll();
+        panelClickPost.revalidate();
+        panelClickPost.repaint();
+        panelClickPost.setSize(1100, 824);
+        panelClickPost.setLayout(null);
+        panelClickPost.setVisible(true);
+
+        //되돌아가기 버튼
+        JButton rollBackButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\forumPage\\rollback.png")));
+        rollBackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switch (interest){
+                    case 0:
+                        panelClickPost.setVisible(false);
+                        panelForumGeneral.setVisible(true);
+                        break;
+                    case 1:
+                        panelClickPost.setVisible(false);
+                        panelForumExcercise.setVisible(true);
+                        break;
+                    case 2:
+                        panelClickPost.setVisible(false);
+                        panelForumPrograming.setVisible(true);
+                        break;
+                    case 3:
+                        panelClickPost.setVisible(false);
+                        panelForumEmploy.setVisible(true);
+                        break;
+                }
+            }
+        });
+        rollBackButton.setFont(mainFont);
+        rollBackButton.setBounds(1000, 110, 80, 80);
+        rollBackButton.setContentAreaFilled(false);
+        panelClickPost.add(rollBackButton);
+
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            HttpClient client = HttpClient.newHttpClient();
+
+            int row = table.getSelectedRow();
+            String post_id = String.valueOf(table.getValueAt(row, 0));
+            System.out.println(post_id);
+            //request 보내기
+            String uri = "http://localhost:8080/api/post/" + post_id;
+            Post post = new Post();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(uri))
+                    .header("Content-Type", "application/json; charset=UTF-8")  // content type, 인코딩형식 지정.
+                    .GET()
+                    .build();
+
+            //response
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            System.out.println("click response : " + response);
+            System.out.println("click response body : " + response.body());
+
+            //responsebody to Post Clas
+            Post apost = objectMapper.readValue(response.body(), Post.class);
+
+            //apost의 내용을 패널에 출력
+            String category = "";
+            switch(interest){
+                case 0: category = "자유게시판";
+                    break;
+                case 1: category = "운동게시판";
+                    break;
+                case 2: category = "프로그래밍";
+                    break;
+                case 3: category = "취업게시판";
+                    break;
+            }
+            //제목
+            JLabel clickPostTitlLabel = new JLabel();
+            clickPostTitlLabel.setText(category+ ", 제목 : " + apost.getTitle());
+            clickPostTitlLabel.setFont(mainFont);
+            clickPostTitlLabel.setBounds(30, 110, 800, 50);
+            panelClickPost.add(clickPostTitlLabel);
+
+            //내용
+            JLabel clickPostContentLabel = new JLabel();
+            clickPostContentLabel.setText("내용");
+            clickPostContentLabel.setFont(mainFont);
+            clickPostContentLabel.setBounds(30, 165, 100, 50);
+            panelClickPost.add(clickPostContentLabel);
+            JTextArea clickPostContentTextArea = new JTextArea(10, 10);
+            clickPostContentTextArea.setFont(smallFont);
+            clickPostContentTextArea.setLineWrap(true);
+            clickPostContentTextArea.setEditable(false);
+            clickPostContentTextArea.setText(apost.getContent());
+            JScrollPane scrollClickPostContent = new JScrollPane(clickPostContentTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollClickPostContent.setBounds(85, 175, 800, 350);
+            scrollClickPostContent.setVisible(true);
+            panelClickPost.add(scrollClickPostContent);
+
+            //댓글
+
+            //글쓴이 체크 후, 수정 삭제 버튼 추가
+        } catch (Exception ex) {
+            System.out.println("글 추가 오류");
+            ex.printStackTrace();
+        }
+    }
+
+    //***********************************************************************************************************************************************************************
+    //***********************************************************************************************************************************************************************
+    //***********************************************************************************************************************************************************************
+
+    private class MyMouseListener extends MouseAdapter {
+        @Override
+        public void mouseClicked(MouseEvent e){
+            if(e.getClickCount() == 2 ){
+                switch (interest){
+                    case 0:
+                        panelForumGeneral.setVisible(false);
+                        getPost(Long.valueOf(interest), generalTable);
+                        break;
+                    case 1: panelForumExcercise.setVisible(false);
+                        getPost(Long.valueOf(interest), excerciseTable);
+                        break;
+                    case 2: panelForumPrograming.setVisible(false);
+                        getPost(Long.valueOf(interest), programingTable);
+                        break;
+                    case 3: panelForumEmploy.setVisible(false);
+                        getPost(Long.valueOf(interest), employTable);
+                        break;
+                }
+            }
         }
     }
 
