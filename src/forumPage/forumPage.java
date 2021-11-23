@@ -26,7 +26,7 @@ public class forumPage extends JFrame {
     private myPanel2 panelClickPost = new myPanel2();
     private int interest = 0; //관심분야, 1, 2, 3 순서대로 운동, 프로그래밍, 취업 0인 경우 자유 게시판 글
     private String[] header = {"id", "interest", "title", "content"}; //table header
-    private int post_id = 0;
+
     private DefaultTableModel general_dtm = new DefaultTableModel(0, 0){
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -34,6 +34,7 @@ public class forumPage extends JFrame {
         }
     };
     private JTable generalTable = new JTable(general_dtm);
+
     private DefaultTableModel excercise_dtm = new DefaultTableModel(0, 0) {
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -41,6 +42,7 @@ public class forumPage extends JFrame {
         }
     };
     private JTable excerciseTable = new JTable(excercise_dtm);
+
     private DefaultTableModel programing_dtm = new DefaultTableModel(0, 0) {
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -48,6 +50,7 @@ public class forumPage extends JFrame {
         }
     };
     private JTable programingTable = new JTable(programing_dtm);
+
     private DefaultTableModel employ_dtm = new DefaultTableModel(0, 0) {
         @Override
         public boolean isCellEditable(int row, int column) {
@@ -209,14 +212,15 @@ public class forumPage extends JFrame {
         //창 끄기 버튼
 
         //포럼페이지를 키자마자 자유게시판 테이블이 생성되고 동시에 게시판을 업데이트한다.
-        updateTable(Long.valueOf(0), general_dtm);
+        updatePost(Long.valueOf(interest), general_dtm);
 
         //자유게시판 갱신 버튼
         JButton generalForumGeneralButton = new JButton();
         generalForumGeneralButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateTable(Long.valueOf(0), general_dtm);
+                interest = 0;
+                updatePost(Long.valueOf(interest), general_dtm);
             }
         });
         generalForumGeneralButton.setText("자유게시판");
@@ -233,7 +237,7 @@ public class forumPage extends JFrame {
                 interest = 1;
                 panelForumGeneral.setVisible(false);
                 panelForumExcercise.setVisible(true);
-                updateTable(Long.valueOf(1), excercise_dtm);
+                updatePost(Long.valueOf(interest), excercise_dtm);
             }
         });
         generalForumExcerciseButton.setText("운동게시판");
@@ -250,7 +254,7 @@ public class forumPage extends JFrame {
                 interest = 2;
                 panelForumGeneral.setVisible(false);
                 panelForumPrograming.setVisible(true);
-                updateTable(Long.valueOf(2), programing_dtm);
+                updatePost(Long.valueOf(interest), programing_dtm);
             }
         });
         generalForumProgramingButton.setText("프로그래밍");
@@ -267,7 +271,7 @@ public class forumPage extends JFrame {
                 interest = 3;
                 panelForumGeneral.setVisible(false);
                 panelForumEmploy.setVisible(true);
-                updateTable(Long.valueOf(3), employ_dtm);
+                updatePost(Long.valueOf(interest), employ_dtm);
             }
         });
         generalForumEmployButton.setText("취업게시판");
@@ -307,7 +311,7 @@ public class forumPage extends JFrame {
                 interest = 0;
                 panelForumExcercise.setVisible(false);
                 panelForumGeneral.setVisible(true);
-                updateTable(Long.valueOf(0), general_dtm);
+                updatePost(Long.valueOf(interest), general_dtm);
             }
         });
         excerciseForumGeneralButton.setText("자유게시판");
@@ -321,7 +325,8 @@ public class forumPage extends JFrame {
         excerciseForumExcerciseButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateTable(Long.valueOf(1), excercise_dtm);
+                interest = 1;
+                updatePost(Long.valueOf(interest), excercise_dtm);
            }
         });
         excerciseForumExcerciseButton.setText("운동게시판");
@@ -338,7 +343,7 @@ public class forumPage extends JFrame {
                 interest = 2;
                 panelForumExcercise.setVisible(false);
                 panelForumPrograming.setVisible(true);
-                updateTable(Long.valueOf(2), programing_dtm);
+                updatePost(Long.valueOf(interest), programing_dtm);
             }
         });
         excerciseForumProgramingButton.setText("프로그래밍");
@@ -355,7 +360,7 @@ public class forumPage extends JFrame {
                 interest = 3;
                 panelForumExcercise.setVisible(false);
                 panelForumEmploy.setVisible(true);
-                updateTable(Long.valueOf(3), employ_dtm);
+                updatePost(Long.valueOf(interest), employ_dtm);
             }
         });
         excerciseForumEmployButton.setText("취업게시판");
@@ -394,7 +399,7 @@ public class forumPage extends JFrame {
                 interest = 0;
                 panelForumPrograming.setVisible(false);
                 panelForumGeneral.setVisible(true);
-                updateTable(Long.valueOf(0), general_dtm);
+                updatePost(Long.valueOf(interest), general_dtm);
             }
         });
         programingForumGeneralButton.setText("자유게시판");
@@ -411,7 +416,7 @@ public class forumPage extends JFrame {
                 interest = 1;
                 panelForumPrograming.setVisible(false);
                 panelForumExcercise.setVisible(true);
-                updateTable(Long.valueOf(1), excercise_dtm);
+                updatePost(Long.valueOf(interest), excercise_dtm);
             }
         });
         programingForumExcerciseButton.setText("운동게시판");
@@ -425,7 +430,7 @@ public class forumPage extends JFrame {
         programingForumProgramingButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateTable(Long.valueOf(2), programing_dtm);
+                updatePost(Long.valueOf(2), programing_dtm);
             }
         });
         programingForumProgramingButton.setText("프로그래밍");
@@ -442,7 +447,7 @@ public class forumPage extends JFrame {
                 interest = 3;
                 panelForumPrograming.setVisible(false);
                 panelForumEmploy.setVisible(true);
-                updateTable(Long.valueOf(3), employ_dtm);
+                updatePost(Long.valueOf(interest), employ_dtm);
             }
         });
         programingForumEmployButton.setText("취업게시판");
@@ -481,7 +486,7 @@ public class forumPage extends JFrame {
                 interest = 0;
                 panelForumEmploy.setVisible(false);
                 panelForumGeneral.setVisible(true);
-                updateTable(Long.valueOf(0), general_dtm);
+                updatePost(Long.valueOf(interest), general_dtm);
             }
         });
         employForumGeneralButton.setText("자유게시판");
@@ -498,7 +503,7 @@ public class forumPage extends JFrame {
                 interest = 1;
                 panelForumEmploy.setVisible(false);
                 panelForumExcercise.setVisible(true);
-                updateTable(Long.valueOf(1), excercise_dtm);
+                updatePost(Long.valueOf(interest), excercise_dtm);
             }
         });
         employForumExcerciseButton.setText("운동게시판");
@@ -515,7 +520,7 @@ public class forumPage extends JFrame {
                 interest = 2;
                 panelForumEmploy.setVisible(false);
                 panelForumPrograming.setVisible(true);
-                updateTable(Long.valueOf(2), programing_dtm);
+                updatePost(Long.valueOf(interest), programing_dtm);
             }
         });
         employForumProgramingButton.setText("프로그래밍");
@@ -529,7 +534,8 @@ public class forumPage extends JFrame {
         employForumEmployButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateTable(Long.valueOf(3), employ_dtm);
+                interest = 3;
+                updatePost(Long.valueOf(interest), employ_dtm);
             }
         });
         employForumEmployButton.setText("취업게시판");
@@ -564,10 +570,10 @@ public class forumPage extends JFrame {
         addPostTitlLabel.setFont(mainFont);
         addPostTitlLabel.setBounds(50, 135, 100, 50);
         panelAddPost.add(addPostTitlLabel);
-        JTextField addPostTitlTextField = new JTextField();
-        addPostTitlTextField.setFont(mainFont);
-        addPostTitlTextField.setBounds(110, 140, 500, 40);
-        panelAddPost.add(addPostTitlTextField);
+        JTextField addPostTitleTextField = new JTextField();
+        addPostTitleTextField.setFont(mainFont);
+        addPostTitleTextField.setBounds(110, 140, 500, 40);
+        panelAddPost.add(addPostTitleTextField);
 
         //카테고리 선택
         JComboBox<String> addPostCategoryBox = new JComboBox();
@@ -595,37 +601,45 @@ public class forumPage extends JFrame {
         addPostSubmitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(addPostTitlTextField.getText().length() > 1000){
+                if(addPostTitleTextField.equals("")){
+                    JOptionPane.showMessageDialog(null, "제목을 입력해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
+                }else if(addPostContentTextArea.getText().equals("")){
+                    JOptionPane.showMessageDialog(null, "내용을 입력해주세요.", "Message", JOptionPane.ERROR_MESSAGE);
+                }else if(addPostTitleTextField.getText().length() > 1000){
                     JOptionPane.showMessageDialog(null, "최대 1000자까지 작성 가능합니다.", "Message", JOptionPane.ERROR_MESSAGE);
                 }else{
-                    int interest = addPostCategoryBox.getSelectedIndex();
-                    switch (interest){
-                        case 0: addTable(Long.valueOf(0), general_dtm, addPostTitlTextField.getText(), addPostContentTextArea.getText());
+                    interest = addPostCategoryBox.getSelectedIndex();
+                    System.out.println("새 글 제출버튼 : " + interest);
+                    switch (interest) {
+                        case 0:
+                            addPost(Long.valueOf(interest), general_dtm, addPostTitleTextField.getText(), addPostContentTextArea.getText());
                             panelAddPost.setVisible(false);
                             panelForumGeneral.setVisible(true);
-                            addPostTitlTextField.setText("");
+                            addPostTitleTextField.setText("");
                             addPostContentTextArea.setText("");
                             break;
-                        case 1:addTable(Long.valueOf(1), excercise_dtm, addPostTitlTextField.getText(), addPostContentTextArea.getText());
+                        case 1:
+                            addPost(Long.valueOf(interest), excercise_dtm, addPostTitleTextField.getText(), addPostContentTextArea.getText());
                             panelAddPost.setVisible(false);
                             panelForumExcercise.setVisible(true);
-                            addPostTitlTextField.setText("");
+                            addPostTitleTextField.setText("");
                             addPostContentTextArea.setText("");
                             break;
-                        case 2:addTable(Long.valueOf(2), programing_dtm, addPostTitlTextField.getText(), addPostContentTextArea.getText());
+                        case 2:
+                            addPost(Long.valueOf(interest), programing_dtm, addPostTitleTextField.getText(), addPostContentTextArea.getText());
                             panelAddPost.setVisible(false);
                             panelForumPrograming.setVisible(true);
-                            addPostTitlTextField.setText("");
+                            addPostTitleTextField.setText("");
                             addPostContentTextArea.setText("");
                             break;
-                        case 3:addTable(Long.valueOf(3), employ_dtm, addPostTitlTextField.getText(), addPostContentTextArea.getText());
+                        case 3:
+                            addPost(Long.valueOf(interest), employ_dtm, addPostTitleTextField.getText(), addPostContentTextArea.getText());
                             panelAddPost.setVisible(false);
                             panelForumEmploy.setVisible(true);
-                            addPostTitlTextField.setText("");
+                            addPostTitleTextField.setText("");
                             addPostContentTextArea.setText("");
                             break;
                     }
-
                 }
             }
         });
@@ -641,7 +655,7 @@ public class forumPage extends JFrame {
     //***********************************************************************************************************************************************************************
 
     //게시판 업데이트 함수
-    void updateTable(Long interest, DefaultTableModel dtm){
+    void updatePost(Long interest, DefaultTableModel dtm){
         dtm.setRowCount(0);
         try{
             HttpClient client = HttpClient.newHttpClient();
@@ -678,7 +692,7 @@ public class forumPage extends JFrame {
     //***********************************************************************************************************************************************************************
 
     //게시판 글 추가 함수
-    void addTable(Long interest, DefaultTableModel dtm, String title, String content) {
+    void addPost(Long interest, DefaultTableModel dtm, String title, String content) {
         try {
             HttpClient client = HttpClient.newHttpClient();
             ObjectMapper objectMapper = new ObjectMapper();
@@ -703,11 +717,8 @@ public class forumPage extends JFrame {
             System.out.println("add response : " + response);
             System.out.println("add response body : " + response.body());
 
-            //responsebody to Post Class
-            Post apost = objectMapper.readValue(response.body(), Post.class);
-
             //update
-            updateTable(interest, dtm);
+            updatePost(interest, dtm);
         } catch (Exception ex) {
             System.out.println("글 추가 오류");
             ex.printStackTrace();
@@ -719,7 +730,7 @@ public class forumPage extends JFrame {
     //***********************************************************************************************************************************************************************
 
     //글 클릭 함수
-    void getPost(Long interset, JTable table){
+    void getPost(JTable table){
         //글을 클릭하면 panelClickPost패널의 컴포넌트 모두 지우고 요청이 들어온 게시글의 정보를 받아서 panelClickPost패널에 추가한다.
         panelClickPost.removeAll();
         panelClickPost.revalidate();
@@ -737,18 +748,22 @@ public class forumPage extends JFrame {
                     case 0:
                         panelClickPost.setVisible(false);
                         panelForumGeneral.setVisible(true);
+                        interest = 0;
                         break;
                     case 1:
                         panelClickPost.setVisible(false);
                         panelForumExcercise.setVisible(true);
+                        interest = 1;
                         break;
                     case 2:
                         panelClickPost.setVisible(false);
                         panelForumPrograming.setVisible(true);
+                        interest = 2;
                         break;
                     case 3:
                         panelClickPost.setVisible(false);
                         panelForumEmploy.setVisible(true);
+                        interest = 3;
                         break;
                 }
             }
@@ -764,10 +779,9 @@ public class forumPage extends JFrame {
 
             int row = table.getSelectedRow();
             String post_id = String.valueOf(table.getValueAt(row, 0));
-            System.out.println(post_id);
+            System.out.println("post id : " + post_id);
             //request 보내기
             String uri = "http://localhost:8080/api/post/" + post_id;
-            Post post = new Post();
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(uri))
                     .header("Content-Type", "application/json; charset=UTF-8")  // content type, 인코딩형식 지정.
@@ -821,7 +835,7 @@ public class forumPage extends JFrame {
 
             //글쓴이 체크 후, 수정 삭제 버튼 추가
         } catch (Exception ex) {
-            System.out.println("글 추가 오류");
+            System.out.println("글 클릭 오류");
             ex.printStackTrace();
         }
     }
@@ -830,23 +844,31 @@ public class forumPage extends JFrame {
     //***********************************************************************************************************************************************************************
     //***********************************************************************************************************************************************************************
 
+    //테이블 클릭 이벤트
     private class MyMouseListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e){
             if(e.getClickCount() == 2 ){
                 switch (interest){
                     case 0:
+                        System.out.println("클릭 : " + interest);
                         panelForumGeneral.setVisible(false);
-                        getPost(Long.valueOf(interest), generalTable);
+                        getPost(generalTable);
                         break;
-                    case 1: panelForumExcercise.setVisible(false);
-                        getPost(Long.valueOf(interest), excerciseTable);
+                    case 1:
+                        System.out.println("클릭 : " + interest);
+                        panelForumExcercise.setVisible(false);
+                        getPost(excerciseTable);
                         break;
-                    case 2: panelForumPrograming.setVisible(false);
-                        getPost(Long.valueOf(interest), programingTable);
+                    case 2:
+                        System.out.println("클릭 : " + interest);
+                        panelForumPrograming.setVisible(false);
+                        getPost(programingTable);
                         break;
-                    case 3: panelForumEmploy.setVisible(false);
-                        getPost(Long.valueOf(interest), employTable);
+                    case 3:
+                        System.out.println("클릭 : " + interest);
+                        panelForumEmploy.setVisible(false);
+                        getPost(employTable);
                         break;
                 }
             }
