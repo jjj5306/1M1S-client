@@ -13,4 +13,11 @@ public class Comment {
     private String content;
     private Member member;
     private LocalDateTime writingDate;
+    public Comment(){};
+    public Comment(String content){
+        this.content = content;
+    }
+    public void setWritingDate(String writingDate) {
+        this.writingDate = LocalDateTime.parse(writingDate);
+    }
 }

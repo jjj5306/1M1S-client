@@ -17,6 +17,7 @@ import java.util.Objects;
 public class forumPage extends JFrame {
     private final Font mainFont = new Font("나눔고딕", Font.PLAIN, 20);
     private final Font smallFont = new Font("나눔고딕", Font.PLAIN, 17);
+    private final Font tinyFont = new Font("나눔고딕", Font.PLAIN, 13);
     private final Font bigFont = new Font("나눔고딕", Font.PLAIN, 25);
     private final Font giantFont = new Font("나눔고딕", Font.BOLD, 35);
     private final myPanel panelForumGeneral = new myPanel();
@@ -29,6 +30,7 @@ public class forumPage extends JFrame {
     //user_id DB에서 받아오기.
     private final Long user_id = (long)1;
     private int interest = 0; //관심분야, 1, 2, 3 순서대로 운동, 프로그래밍, 취업 0인 경우 자유 게시판 글
+    private String post_id;
 
     //테이블 선언
     private DefaultTableModel general_dtm = new DefaultTableModel(0, 0){
@@ -62,6 +64,15 @@ public class forumPage extends JFrame {
         }
     };
     private JTable employTable = new JTable(employ_dtm);
+
+    private DefaultTableModel comment_dtm = new DefaultTableModel(0, 0) {
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    };
+    private JTable commentTable = new JTable(comment_dtm);
+    private JScrollPane commentScrollPane;
 
     public forumPage() {
         //프레임 설정
@@ -216,6 +227,28 @@ public class forumPage extends JFrame {
         employForumScrollPane.setVisible(true);
         employForumScrollPane.setBounds(25, 110, 850, 650);
         panelForumEmploy.add(employForumScrollPane);
+
+        //댓글테이블 설정
+        //칼럼 만들기
+        String[] header2 = {"comment_id", "user_id", "content"};
+        comment_dtm.setColumnIdentifiers(header2);
+        //comment_id
+        commentTable.getColumn("comment_id").setWidth(100);
+        commentTable.getColumn("comment_id").setMinWidth(100);
+        commentTable.getColumn("comment_id").setMaxWidth(100);
+        commentTable.getColumn("user_id").setWidth(100);
+        commentTable.getColumn("user_id").setMinWidth(100);
+        commentTable.getColumn("user_id").setMaxWidth(100);
+        //컬럼 크기, 위치 조절 불가
+        commentTable.getTableHeader().setReorderingAllowed(false);
+        commentTable.getTableHeader().setReorderingAllowed(false);
+        //마우스 이벤트 추가
+        commentTable.addMouseListener(new MyMouseListener2());
+        //스크롤팬 설정
+        commentScrollPane = new JScrollPane(commentTable, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        commentScrollPane.setVisible(true);
+        commentScrollPane.setBounds(35, 505, 800, 190);
+        panelClickPost.add(commentScrollPane);
 
         //***********************************************************************************************************************************************************************
         //***********************************************************************************************************************************************************************
@@ -744,7 +777,7 @@ public class forumPage extends JFrame {
             HttpClient client = HttpClient.newHttpClient();
 
             int row = table.getSelectedRow();
-            String post_id = String.valueOf(table.getValueAt(row, 0));
+            post_id = String.valueOf(table.getValueAt(row, 0));
 
             //request 보내기
             String uri = "http://localhost:8080/api/post/" + post_id;
@@ -774,26 +807,23 @@ public class forumPage extends JFrame {
             clickPostCategoryLabel.setBounds(23, 23, 800, 50);
             panelClickPost.add(clickPostCategoryLabel);
 
-            //제목
+            //제목 출력
             JLabel clickPostTitleLabel = new JLabel();
             clickPostTitleLabel.setText(apost.getTitle());
             clickPostTitleLabel.setFont(bigFont);
             clickPostTitleLabel.setBounds(35, 105, 800, 50);
             panelClickPost.add(clickPostTitleLabel);
 
-            //내용
+            //내용 출력
             JTextArea clickPostContentTextArea = new JTextArea(10, 10);
             clickPostContentTextArea.setFont(smallFont);
             clickPostContentTextArea.setLineWrap(true);
             clickPostContentTextArea.setEditable(false);
             clickPostContentTextArea.setText(apost.getContent());
             JScrollPane scrollClickPostContent = new JScrollPane(clickPostContentTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-            scrollClickPostContent.setBounds(35, 165, 800, 350);
+            scrollClickPostContent.setBounds(35, 165, 800, 340);
             scrollClickPostContent.setVisible(true);
             panelClickPost.add(scrollClickPostContent);
-
-            //댓글
-
 
             //글 수정하기
             if(Objects.equals(user_id, apost.getMember().getId())) {
@@ -832,13 +862,10 @@ public class forumPage extends JFrame {
                                     .header("Content-Type", "application/json; charset=UTF-8")  // content type, 인코딩형식 지정.
                                     .DELETE() //Delete는 body없어도 동작
                                     .build();
-                            System.out.println("delete request : " + request1);
 
                             try {
                                 //response
                                 HttpResponse<String> response1 = client1.send(request1, HttpResponse.BodyHandlers.ofString());
-                                System.out.println("delete response : " + response1);
-                                System.out.println("delete response body : " + response1.body());
 
                                 //패널전환
                                 switch (interest) {
@@ -881,6 +908,34 @@ public class forumPage extends JFrame {
                 }
             }
 
+            //댓글테이블 추가
+            panelClickPost.add(commentScrollPane);
+            updateComment();
+
+            //댓글쓰기
+            JTextArea addCommentTextArea = new JTextArea(10, 10);
+            addCommentTextArea.setFont(tinyFont);
+            addCommentTextArea.setLineWrap(true);
+            JScrollPane scrollAddComment = new JScrollPane(addCommentTextArea, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollAddComment.setBounds(35, 695, 740, 60);
+            scrollAddComment.setVisible(true);
+            panelClickPost.add(scrollAddComment);
+
+            //댓글쓰기버튼
+            JButton addCommentButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\forumPage\\addComment.png")));
+            addCommentButton.addActionListener(e -> {
+                if(!addCommentTextArea.equals("")){
+                    addComment(addCommentTextArea.getText());
+                    addCommentTextArea.setText("");
+                    comment_dtm.fireTableDataChanged();
+                }
+            });
+            addCommentButton.setFont(mainFont);
+            addCommentButton.setBounds(775, 695, 60, 60);
+            addCommentButton.setContentAreaFilled(false);
+            panelClickPost.add(addCommentButton);
+
+
         } catch (Exception ex) {
             System.out.println("글 클릭 오류");
             ex.printStackTrace();
@@ -891,7 +946,7 @@ public class forumPage extends JFrame {
     //***********************************************************************************************************************************************************************
     //***********************************************************************************************************************************************************************
 
-    //테이블 클릭 이벤트
+    //게시글 테이블 클릭 이벤트
     private class MyMouseListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e){
@@ -989,7 +1044,6 @@ public class forumPage extends JFrame {
                     //request body
                     Post modifyPost = new Post((long)interest, modifyPostTitleTextField.getText(), modifyPostContentTextArea.getText());
                     String requestBody = objectMapper.writeValueAsString(modifyPost);
-                    System.out.println("modify requestBody : " + requestBody);
                     HttpRequest request = HttpRequest.newBuilder()
                             .uri(URI.create(uri))
                             .header("Content-Type", "application/json; charset=UTF-8")  // content type, 인코딩형식 지정.
@@ -998,8 +1052,6 @@ public class forumPage extends JFrame {
 
                     //response
                     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-                    System.out.println("modify response : " + response);
-                    System.out.println("modify response body : " + response.body());
 
                     modifyPostTitleTextField.setText("");
                     modifyPostContentTextArea.setText("");
@@ -1037,6 +1089,113 @@ public class forumPage extends JFrame {
         modifyPostSubmitButton.setBounds(930, 690, 130, 80);
         modifyPostSubmitButton.setContentAreaFilled(true);
         panelModifyPost.add(modifyPostSubmitButton);
+    }
+
+    //***********************************************************************************************************************************************************************
+    //***********************************************************************************************************************************************************************
+    //***********************************************************************************************************************************************************************
+
+    //댓글 업데이트
+    private void updateComment() {
+        comment_dtm.setRowCount(0); //테이블 초기화
+        try{
+            HttpClient client = HttpClient.newHttpClient();
+            ObjectMapper mapper = new ObjectMapper();
+
+            //request보내기
+            String uri = "http://localhost:8080/api/post/" + post_id + "/comment";
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(uri))  // 위에서 만든 URI
+                    .GET()  // HTTP 메소드, body 지정(GET의 경우 생략 가능)
+                    .build();
+
+            // 위에서 생성한 request를 보내고, 받은 response를 저장
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            // responseBody to Post Class Array
+            Comment[] comments = mapper.readValue(response.body(), Comment[].class);
+
+            // Jtable에 일정 추가
+            for(Comment c : comments) {
+                comment_dtm.addRow(new Object[] {c.getId(), c.getMember().getId(), c.getContent()});
+            }
+        }catch(Exception e){
+            System.out.println("댓글 업데이트 오류");
+            e.printStackTrace();
+        }
+    }
+
+    //***********************************************************************************************************************************************************************
+    //***********************************************************************************************************************************************************************
+    //***********************************************************************************************************************************************************************
+
+    //댓글 쓰기
+    private void addComment(String content) {
+        try {
+            HttpClient client = HttpClient.newHttpClient();
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            //request 보내기
+            String uri = "http://localhost:8080/api/user/" + user_id + "/comment?post_id=" + post_id;
+            //request body
+            Comment comment = new Comment(content);
+            String requestBody = objectMapper.writeValueAsString(comment);
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(uri))
+                    .header("Content-Type", "application/json; charset=UTF-8")  // content type, 인코딩형식 지정.
+                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))  // HTTP 메소드, body 지정(위에서 만든 JSON 전달)
+                    .build();
+
+            //response
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            //update
+            updateComment();
+        } catch (Exception ex) {
+            System.out.println("댓글 추가 오류");
+            ex.printStackTrace();
+        }
+    }
+
+    //***********************************************************************************************************************************************************************
+    //***********************************************************************************************************************************************************************
+    //***********************************************************************************************************************************************************************
+
+    //댓글 테이블 클릭 이벤트
+    private class MyMouseListener2 extends MouseAdapter {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            if (e.getClickCount() == 2) {
+                int row = commentTable.getSelectedRow();
+                Long comment_id = (Long)comment_dtm.getValueAt(row, 0);
+                Long commentUser_id = (Long) comment_dtm.getValueAt(row, 1);
+                if(commentUser_id == user_id){
+                    int confirmDelete = JOptionPane.showConfirmDialog(null,
+                            "댓글을 삭제하시겠습니까?", "Message", JOptionPane.YES_NO_OPTION);
+                    if(confirmDelete == 0){
+                        HttpClient client = HttpClient.newHttpClient();
+                        //request 보내기
+                        String uri = "http://localhost:8080/api/user/" + user_id + "/comment/" + comment_id;
+                        HttpRequest request = HttpRequest.newBuilder()
+                                .uri(URI.create(uri))
+                                .header("Content-Type", "application/json; charset=UTF-8")  // content type, 인코딩형식 지정.
+                                .DELETE() //Delete는 body없어도 동작
+                                .build();
+
+                        try {
+                            //response
+                            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+                            //업데이트
+                            updateComment();
+                            comment_dtm.fireTableDataChanged();
+                        } catch (Exception ex) {
+                            System.out.println("댓글 삭제 응답오류");
+                            ex.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
     }
 
     //***********************************************************************************************************************************************************************

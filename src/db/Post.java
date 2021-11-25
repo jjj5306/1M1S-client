@@ -19,7 +19,6 @@ public class Post {
         this.writingDate = LocalDateTime.parse(writingDate);
     }
     public Post(){}
-
     public Post(Long interest, String title, String content){
         this.interest = new Interest(interest);
         this.title = title;
