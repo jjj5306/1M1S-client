@@ -71,7 +71,6 @@ public class mainPage extends JFrame {
         //게시판 버튼 설정
         JButton button5 = new JButton("게시판");
         button5.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null, "게시판으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
             forumPage forum = new forumPage();
         });
         button5.setFont(mainFont);

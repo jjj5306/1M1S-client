@@ -233,9 +233,9 @@ public class forumPage extends JFrame {
         String[] header2 = {"comment_id", "user_id", "content"};
         comment_dtm.setColumnIdentifiers(header2);
         //comment_id
-        commentTable.getColumn("comment_id").setWidth(100);
-        commentTable.getColumn("comment_id").setMinWidth(100);
-        commentTable.getColumn("comment_id").setMaxWidth(100);
+        commentTable.getColumn("comment_id").setWidth(0);
+        commentTable.getColumn("comment_id").setMinWidth(0);
+        commentTable.getColumn("comment_id").setMaxWidth(0);
         commentTable.getColumn("user_id").setWidth(100);
         commentTable.getColumn("user_id").setMinWidth(100);
         commentTable.getColumn("user_id").setMaxWidth(100);
@@ -922,7 +922,7 @@ public class forumPage extends JFrame {
             panelClickPost.add(scrollAddComment);
 
             //댓글쓰기버튼
-            JButton addCommentButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\forumPage\\addComment.png")));
+            JButton addCommentButton = new JButton(new ImageIcon(("C:\\Users\\Asus\\IdeaProjects\\1M1S-client\\src\\forumPage\\comment.png")));
             addCommentButton.addActionListener(e -> {
                 if(!addCommentTextArea.equals("")){
                     addComment(addCommentTextArea.getText());
