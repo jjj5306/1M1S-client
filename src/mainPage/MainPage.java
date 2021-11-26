@@ -58,11 +58,11 @@ public class mainPage extends JFrame {
         button3.setBounds(0, 220, 200, 110);
         mainPanel.add(button3);
 
-        //그룹 버튼 설정
-        JButton button4 = new JButton("그룹");
+        //상담 버튼 설정
+        JButton button4 = new JButton("상담");
         button4.addActionListener(e -> {
             //여기에 그룹 페이지로 이동하는 부분 작성
-            JOptionPane.showMessageDialog(null, "그룹으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "상담으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
         });
         button4.setFont(mainFont);
         button4.setBounds(0, 330, 200, 110);
