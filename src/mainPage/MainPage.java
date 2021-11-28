@@ -2,6 +2,7 @@ package mainPage;
 
 import loginPage.loginPage;
 import forumPage.forumPage;
+import myPage.myPage;
 import javax.swing.*;
 import java.awt.*;
 
@@ -31,8 +32,7 @@ public class mainPage extends JFrame {
         //마이페이지 버튼 설정
         JButton button1 = new JButton("회원 정보");
         button1.addActionListener(e -> {
-            //여기에 마이 페이지로 이동하는 부분 작성
-            JOptionPane.showMessageDialog(null, "마이페이지로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            myPage mypage = new myPage();
         });
         button1.setFont(mainFont);
         button1.setBounds(0, 0, 200, 110);

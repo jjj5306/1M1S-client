@@ -17,6 +17,10 @@ public class MemberInformation {
     private String gender;
     private String email;
     private LocalDateTime registerDate;
+    public MemberInformation(){}
+    public MemberInformation(String username, String password){
+        member = new Member(username, password);
+    }
     public MemberInformation(String name, String nickname, String email, boolean man, String username, String password){
         this.name = name;
         this.nickname = nickname;
