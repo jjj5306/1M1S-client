@@ -9,7 +9,7 @@ import db.*;
 
 public class signUpPage extends JFrame {
     private Long interest_selected = Long.parseLong(Integer.toString(0)); //유저 관심 분야, 순서대로 운동, 프로그래밍, 취업
-    private final Font BigFont = new Font("나눔고딕", Font.PLAIN, 30);
+    private final Font bigFont = new Font("나눔고딕", Font.PLAIN, 30);
     private final Font mainFont = new Font("나눔고딕", Font.PLAIN, 20);
     private final myPanel1 panel1 = new myPanel1();
     private final myPanel2 panel2 = new myPanel2();
@@ -215,7 +215,7 @@ public class signUpPage extends JFrame {
         //안내 글
         JLabel text = new JLabel();
         text.setText("관심 분야를 선택해주세요!");
-        text.setFont(BigFont);
+        text.setFont(bigFont);
         text.setBounds(300 ,180, 500, 70);
         panel2.add(text);
 
@@ -295,7 +295,7 @@ public class signUpPage extends JFrame {
         //설문조사 1
         JLabel exerciseSurvey1 = new JLabel();
         exerciseSurvey1.setText("질문 1");
-        exerciseSurvey1.setFont(BigFont);
+        exerciseSurvey1.setFont(bigFont);
         exerciseSurvey1.setBounds(280, 120, 100, 70);
         panelExercise1.add(exerciseSurvey1);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -326,7 +326,7 @@ public class signUpPage extends JFrame {
         //설문조사 2
         JLabel exerciseSurvey2 = new JLabel();
         exerciseSurvey2.setText("질문 2");
-        exerciseSurvey2.setFont(BigFont);
+        exerciseSurvey2.setFont(bigFont);
         exerciseSurvey2.setBounds(280, 270, 100, 70);
         panelExercise1.add(exerciseSurvey2);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -357,7 +357,7 @@ public class signUpPage extends JFrame {
         //설문조사 3
         JLabel exerciseSurvey3 = new JLabel();
         exerciseSurvey3.setText("질문 3");
-        exerciseSurvey3.setFont(BigFont);
+        exerciseSurvey3.setFont(bigFont);
         exerciseSurvey3.setBounds(280, 420, 100, 70);
         panelExercise1.add(exerciseSurvey3);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -506,7 +506,7 @@ public class signUpPage extends JFrame {
         //설문조사 4
         JLabel exerciseSurvey4 = new JLabel();
         exerciseSurvey4.setText("질문 4");
-        exerciseSurvey4.setFont(BigFont);
+        exerciseSurvey4.setFont(bigFont);
         exerciseSurvey4.setBounds(280, 120, 100, 70);
         panelExercise2.add(exerciseSurvey4);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -537,7 +537,7 @@ public class signUpPage extends JFrame {
         //설문조사 5
         JLabel exerciseSurvey5 = new JLabel();
         exerciseSurvey5.setText("질문 5");
-        exerciseSurvey5.setFont(BigFont);
+        exerciseSurvey5.setFont(bigFont);
         exerciseSurvey5.setBounds(280, 270, 100, 70);
         panelExercise2.add(exerciseSurvey5);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -568,7 +568,7 @@ public class signUpPage extends JFrame {
         //설문조사 6
         JLabel exerciseSurvey6 = new JLabel();
         exerciseSurvey6.setText("질문 6");
-        exerciseSurvey6.setFont(BigFont);
+        exerciseSurvey6.setFont(bigFont);
         exerciseSurvey6.setBounds(280, 420, 100, 70);
         panelExercise2.add(exerciseSurvey6);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -699,7 +699,7 @@ public class signUpPage extends JFrame {
         //설문조사 1
         JLabel programingSurvey1 = new JLabel();
         programingSurvey1.setText("질문 1");
-        programingSurvey1.setFont(BigFont);
+        programingSurvey1.setFont(bigFont);
         programingSurvey1.setBounds(280, 120, 100, 70);
         panelPrograming1.add(programingSurvey1);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -730,7 +730,7 @@ public class signUpPage extends JFrame {
         //설문조사 2
         JLabel programingSurvey2 = new JLabel();
         programingSurvey2.setText("질문 2");
-        programingSurvey2.setFont(BigFont);
+        programingSurvey2.setFont(bigFont);
         programingSurvey2.setBounds(280, 270, 100, 70);
         panelPrograming1.add(programingSurvey2);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -761,7 +761,7 @@ public class signUpPage extends JFrame {
         //설문조사 3
         JLabel programingSurvey3 = new JLabel();
         programingSurvey3.setText("질문 3");
-        programingSurvey3.setFont(BigFont);
+        programingSurvey3.setFont(bigFont);
         programingSurvey3.setBounds(280, 420, 100, 70);
         panelPrograming1.add(programingSurvey3);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -910,7 +910,7 @@ public class signUpPage extends JFrame {
         //설문조사 4
         JLabel programingSurvey4 = new JLabel();
         programingSurvey4.setText("질문 4");
-        programingSurvey4.setFont(BigFont);
+        programingSurvey4.setFont(bigFont);
         programingSurvey4.setBounds(280, 120, 100, 70);
         panelPrograming2.add(programingSurvey4);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -941,7 +941,7 @@ public class signUpPage extends JFrame {
         //설문조사 5
         JLabel programingSurvey5 = new JLabel();
         programingSurvey5.setText("질문 5");
-        programingSurvey5.setFont(BigFont);
+        programingSurvey5.setFont(bigFont);
         programingSurvey5.setBounds(280, 270, 100, 70);
         panelPrograming2.add(programingSurvey5);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -972,7 +972,7 @@ public class signUpPage extends JFrame {
         //설문조사 6
         JLabel programingSurvey6 = new JLabel();
         programingSurvey6.setText("질문 6");
-        programingSurvey6.setFont(BigFont);
+        programingSurvey6.setFont(bigFont);
         programingSurvey6.setBounds(280, 420, 100, 70);
         panelPrograming2.add(programingSurvey6);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -1103,7 +1103,7 @@ public class signUpPage extends JFrame {
         //설문조사 1
         JLabel employSurvey1 = new JLabel();
         employSurvey1.setText("질문 1");
-        employSurvey1.setFont(BigFont);
+        employSurvey1.setFont(bigFont);
         employSurvey1.setBounds(280, 120, 100, 70);
         panelEmploy1.add(employSurvey1);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -1134,7 +1134,7 @@ public class signUpPage extends JFrame {
         //설문조사 2
         JLabel employSurvey2 = new JLabel();
         employSurvey2.setText("질문 2");
-        employSurvey2.setFont(BigFont);
+        employSurvey2.setFont(bigFont);
         employSurvey2.setBounds(280, 270, 100, 70);
         panelEmploy1.add(employSurvey2);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -1165,7 +1165,7 @@ public class signUpPage extends JFrame {
         //설문조사 3
         JLabel employSurvey3 = new JLabel();
         employSurvey3.setText("질문 3");
-        employSurvey3.setFont(BigFont);
+        employSurvey3.setFont(bigFont);
         employSurvey3.setBounds(280, 420, 100, 70);
         panelEmploy1.add(employSurvey3);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -1314,7 +1314,7 @@ public class signUpPage extends JFrame {
         //설문조사 4
         JLabel employSurvey4 = new JLabel();
         employSurvey4.setText("질문 4");
-        employSurvey4.setFont(BigFont);
+        employSurvey4.setFont(bigFont);
         employSurvey4.setBounds(280, 120, 100, 70);
         panelEmploy2.add(employSurvey4);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -1345,7 +1345,7 @@ public class signUpPage extends JFrame {
         //설문조사 5
         JLabel employSurvey5 = new JLabel();
         employSurvey5.setText("질문 5");
-        employSurvey5.setFont(BigFont);
+        employSurvey5.setFont(bigFont);
         employSurvey5.setBounds(280, 270, 100, 70);
         panelEmploy2.add(employSurvey5);
         //이 부분도 api로 |로 구분된 string을 받는다.
@@ -1376,7 +1376,7 @@ public class signUpPage extends JFrame {
         //설문조사 6
         JLabel employSurvey6 = new JLabel();
         employSurvey6.setText("질문 6");
-        employSurvey6.setFont(BigFont);
+        employSurvey6.setFont(bigFont);
         employSurvey6.setBounds(280, 420, 100, 70);
         panelEmploy2.add(employSurvey6);
         //이 부분도 api로 |로 구분된 string을 받는다.

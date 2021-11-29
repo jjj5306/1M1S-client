@@ -27,7 +27,7 @@ public class myPage extends JFrame {
     private final Long user_id = (long)1;
     public myPage() {
         //프레임 설정
-        setTitle("1M1S-forum");
+        setTitle("1M1S-myPage");
         setVisible(true);
         setLayout(null);
         setResizable(false);

@@ -2,6 +2,7 @@ package mainPage;
 
 import loginPage.loginPage;
 import forumPage.forumPage;
+import consultingPage.consultingPage;
 import myPage.myPage;
 import javax.swing.*;
 import java.awt.*;
@@ -61,8 +62,7 @@ public class mainPage extends JFrame {
         //상담 버튼 설정
         JButton button4 = new JButton("상담");
         button4.addActionListener(e -> {
-            //여기에 그룹 페이지로 이동하는 부분 작성
-            JOptionPane.showMessageDialog(null, "상담으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+            consultingPage consulting = new consultingPage();
         });
         button4.setFont(mainFont);
         button4.setBounds(0, 330, 200, 110);
@@ -78,7 +78,6 @@ public class mainPage extends JFrame {
         mainPanel.add(button5);
 
         //커리큘럼 버튼 설정
-        //게시판 버튼 설정
         JButton button6 = new JButton("커리큘럼");
         button6.addActionListener(e -> JOptionPane.showMessageDialog(null, "커리큘럼으로 이동합니다.", "Message", JOptionPane.INFORMATION_MESSAGE));
         button6.setFont(mainFont);
